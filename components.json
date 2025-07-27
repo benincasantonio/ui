@@ -8,11 +8,11 @@
     "css": "src/index.css",
     "baseColor": "neutral",
     "cssVariables": true,
-    "prefix": "Shadcn"
+    "prefix": ""
   },
   "aliases": {
     "components": "@/components",
-    "utils": "@/shadcn/ib/utils",
+    "utils": "@/shadcn/lib/utils",
     "ui": "@/shadcn/ui",
     "lib": "@/shadcn/lib",
     "hooks": "@/hooks"
