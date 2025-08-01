@@ -1,46 +1,52 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
+import { Button } from "./Button.tsx";
 
 describe("Button", () => {
-    it('should renders children correctly', () => {
-        render(<button>Click Me</button>);
-        expect(screen.getByRole('button', { name: /click me/i })).toBeInTheDocument();
-    });
+  it("should renders children correctly", () => {
+    render(<Button>Click Me</Button>);
+    expect(
+      screen.getByRole("button", { name: /click me/i }),
+    ).toBeInTheDocument();
+  });
 
-    it('should call method onClick', () => {
-        const handleClick = vi.fn();
-        render(<button onClick={handleClick}>Click Me</button>);
-        const button = screen.getByRole('button', { name: /click me/i });
+  it("should call method onClick", () => {
+    const handleClick = vi.fn();
+    render(<Button onClick={handleClick}>Click Me</Button>);
+    const button = screen.getByRole("button", { name: /click me/i });
 
-        button.click();
+    button.click();
 
-        expect(handleClick).toHaveBeenCalledTimes(1);
-    })
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
 
-    it('should not call method onClick when disabled', () => {
-        const handleClick = vi.fn();
-        render(<button onClick={handleClick} disabled>Click Me</button>);
-        const button = screen.getByRole('button', { name: /click me/i });
+  it("should not call method onClick when disabled", () => {
+    const handleClick = vi.fn();
+    render(
+      <Button onClick={handleClick} disabled>
+        Click Me
+      </Button>,
+    );
+    const button = screen.getByRole("button", { name: /click me/i });
 
-        button.click();
+    button.click();
 
-        expect(handleClick).not.toHaveBeenCalled();
-    })
+    expect(handleClick).not.toHaveBeenCalled();
+  });
 
-    it('should have correct type attribute', () => {
-        render(<button type="submit">Submit</button>);
-        const button = screen.getByRole('button', { name: /submit/i });
+  it("should have correct type attribute", () => {
+    render(<Button type="submit">Submit</Button>);
+    const button = screen.getByRole("button", { name: /submit/i });
 
-        expect(button).toHaveAttribute('type', 'submit');
-    });
+    expect(button).toHaveAttribute("type", "submit");
+  });
 
-    it('should forward ref correctly', () => {
-        const ref = {
-            current: null
-        }
-        render(<button ref={ref}>Click Me</button>);
+  it("should forward ref correctly", () => {
+    const ref = {
+      current: null,
+    };
+    render(<Button ref={ref}>Click Me</Button>);
 
-
-        expect(ref.current).toBeInstanceOf(HTMLButtonElement)
-    })
+    expect(ref.current).toBeInstanceOf(HTMLButtonElement);
+  });
 });
