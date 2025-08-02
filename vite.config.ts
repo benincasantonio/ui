@@ -35,6 +35,10 @@ export default defineConfig({
         "**/*.stories.tsx",
         "**/*.spec.tsx",
         "**/*.test.tsx",
+        "**/*.stories.tsx",
+        "**/*.stories.ts",
+        "**/**.d.ts",
+        "**/main.tsx",
       ],
     },
     projects: [
