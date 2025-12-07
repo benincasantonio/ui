@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Input } from "@/components/Input/Input.tsx";
+import { Input } from "@/ui/Input/Input";
 import { within, userEvent, expect, fn } from "storybook/test";
 
 const meta = {
