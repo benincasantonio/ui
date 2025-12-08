@@ -27,9 +27,10 @@ export default defineConfig({
         "**/*.spec.tsx",
         "**/*.test.tsx",
         "**/*.stories.ts",
-        "**/**.d.ts",
         "**/main.tsx",
       ],
+      tsconfigPath: "./tsconfig.app.json",
+      rollupTypes: true,
     }),
   ],
   build: {
