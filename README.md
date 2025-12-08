@@ -1,69 +1,172 @@
-# React + TypeScript + Vite
+# @antoniobenincasa/ui
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal design system library built with React, TypeScript, and shadcn/ui components. This library provides a collection of reusable, accessible UI components styled with Tailwind CSS.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎨 **shadcn/ui Components** - Built on top of shadcn/ui for beautiful, accessible components
+- ⚡ **TypeScript** - Fully typed for better developer experience
+- 🎯 **Tailwind CSS v4** - Modern utility-first CSS framework
+- 📦 **Tree-shakeable** - Import only what you need
+- 🧩 **Modular** - Components can be used independently
+- 📚 **Storybook** - Interactive component documentation
+- 🧪 **Vitest** - Comprehensive testing setup
+- ♿ **Accessible** - Built with accessibility in mind
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install @antoniobenincasa/ui
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Peer Dependencies
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+This library requires the following peer dependencies:
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install react react-dom tailwindcss lucide-react
 ```
+
+## Usage
+
+### Import Components
+
+```tsx
+import { Button, Input } from "@antoniobenincasa/ui";
+import "@antoniobenincasa/ui/ui.css";
+```
+
+### Example
+
+```tsx
+import { Button, Input } from "@antoniobenincasa/ui";
+import "@antoniobenincasa/ui/ui.css";
+
+function App() {
+  return (
+    <div>
+      <Input placeholder="Enter your name" />
+      <Button variant="default">Click me</Button>
+    </div>
+  );
+}
+```
+
+## Available Components
+
+### Button
+
+A versatile button component with multiple variants and sizes.
+
+```tsx
+import { Button } from "@antoniobenincasa/ui";
+
+// Variants
+<Button variant="default">Default</Button>
+<Button variant="destructive">Destructive</Button>
+<Button variant="outline">Outline</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="ghost">Ghost</Button>
+<Button variant="link">Link</Button>
+
+// Sizes
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+<Button size="icon">Icon</Button>
+```
+
+### Input
+
+A styled input component with built-in focus states and validation support.
+
+```tsx
+import { Input } from "@antoniobenincasa/ui";
+
+<Input type="text" placeholder="Enter text" />
+<Input type="email" placeholder="Enter email" />
+<Input type="password" placeholder="Enter password" />
+```
+
+## Development
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+
+# Start Storybook
+npm run storybook
+```
+
+### Build
+
+```bash
+# Build the library
+npm run build
+```
+
+The build output will be in the `dist` directory:
+
+- `index.es.js` - ES module format
+- `index.cjs.js` - CommonJS format
+- `index.d.ts` - TypeScript definitions
+- `ui.css` - Stylesheet
+
+### Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run unit tests with coverage
+npm run test:unit
+
+# Run Storybook tests
+npm run test:unit:storybook
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+```
+src/
+├── index.ts          # Main entry point
+├── index.css         # Global styles
+├── lib/
+│   └── utils.ts      # Utility functions
+└── ui/
+    ├── Button/       # Button component
+    ├── Input/        # Input component
+    └── index.ts      # Component exports
+```
+
+## Tech Stack
+
+- **React** - UI library
+- **TypeScript** - Type safety
+- **Vite** - Build tool
+- **Tailwind CSS v4** - Styling
+- **shadcn/ui** - Component foundation
+- **Radix UI** - Accessible primitives
+- **Storybook** - Component documentation
+- **Vitest** - Testing framework
+- **ESLint** - Code linting
+
+## License
+
+This is a personal project. All rights reserved.
