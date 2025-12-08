@@ -7,6 +7,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import tailwindcss from "@tailwindcss/vite";
+import dts from "vite-plugin-dts";
 
 const dirname =
   typeof __dirname !== "undefined"
@@ -15,7 +16,43 @@ const dirname =
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    dts({
+      insertTypesEntry: true,
+      include: ["src"],
+      exclude: [
+        "**/*.stories.tsx",
+        "**/*.spec.tsx",
+        "**/*.test.tsx",
+        "**/*.stories.ts",
+        "**/**.d.ts",
+        "**/main.tsx",
+      ],
+    }),
+  ],
+  build: {
+    lib: {
+      entry: path.resolve(dirname, "src/index.ts"),
+      name: "ui",
+      fileName: (format) => `index.${format}.js`,
+      formats: ["es", "cjs"],
+    },
+    rollupOptions: {
+      external: ["react", "react-dom", "tailwindcss", "lucide-react"],
+      output: {
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+          tailwindcss: "tailwindcss",
+          "lucide-react": "LucideReact",
+        },
+      },
+    },
+    sourcemap: true,
+    emptyOutDir: true,
+  },
   resolve: {
     alias: {
       "@": path.resolve(dirname, "src"),
