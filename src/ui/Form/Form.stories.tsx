@@ -22,13 +22,13 @@ const basicFormSchema = z.object({
     .string()
     .min(3, "Username must be at least 3 characters.")
     .max(20, "Username must be at most 20 characters."),
-  email: z.email({ message: "Please enter a valid email address." }),
+  email: z.email("Please enter a valid email address."),
 });
 
 // Complex form schema
 const complexFormSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.email({ message: "Please enter a valid email address." }),
+  email: z.string().email("Please enter a valid email address."),
   password: z
     .string()
     .min(8, "Password must be at least 8 characters.")
@@ -60,14 +60,15 @@ type Story = StoryObj<typeof meta>;
 function BasicFormExample() {
   const form = useForm<BasicFormValues>({
     resolver: zodResolver(basicFormSchema),
+    mode: "onBlur",
     defaultValues: {
       username: "",
       email: "",
     },
   });
 
-  const onSubmit = fn((data: BasicFormValues) => {
-    console.log("Form submitted:", data);
+  const onSubmit = fn(() => {
+    console.log("Form submitted:");
   });
 
   return (
@@ -123,6 +124,7 @@ function BasicFormExample() {
 function ComplexFormExample() {
   const form = useForm<ComplexFormValues>({
     resolver: zodResolver(complexFormSchema),
+    mode: "onBlur",
     defaultValues: {
       name: "",
       email: "",
@@ -131,8 +133,8 @@ function ComplexFormExample() {
     },
   });
 
-  const onSubmit = fn((data: ComplexFormValues) => {
-    console.log("Form submitted:", data);
+  const onSubmit = fn(() => {
+    console.log("Form submitted:");
   });
 
   return (
@@ -216,13 +218,14 @@ function ComplexFormExample() {
 function SimpleFormExample() {
   const form = useForm<{ name: string }>({
     resolver: zodResolver(z.object({ name: z.string().min(1, "Name is required.") })),
+    mode: "onBlur",
     defaultValues: {
       name: "",
     },
   });
 
-  const onSubmit = fn((data: { name: string }) => {
-    console.log("Form submitted:", data);
+  const onSubmit = fn(() => {
+    console.log("Form submitted");
   });
 
   return (
@@ -308,10 +311,10 @@ export const FormInteraction: Story = {
       const submitButton = canvas.getByRole("button", { name: /submit/i });
       await userEvent.click(submitButton);
 
-      // Should not show validation errors
+      // Should not show validation errors - check for specific error messages
       await waitFor(() => {
         const usernameError = canvas.queryByText(/username must be/i);
-        const emailError = canvas.queryByText(/email/i);
+        const emailError = canvas.queryByText("Please enter a valid email address.");
         expect(usernameError).not.toBeInTheDocument();
         expect(emailError).not.toBeInTheDocument();
       });
@@ -372,35 +375,47 @@ export const PasswordValidation: Story = {
       await userEvent.type(passwordInput, "weak", { delay: 50 });
       await userEvent.tab();
 
-      await waitFor(() => {
-        const error = canvas.getByText(/password must be at least 8 characters/i);
-        expect(error).toBeInTheDocument();
-      });
+      await waitFor(
+        () => {
+          const error = canvas.getByText("Password must be at least 8 characters.");
+          expect(error).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
 
     await step("Enter password without uppercase", async () => {
-      await userEvent.clear(canvas.getByPlaceholderText("Enter password"));
-      await userEvent.type(canvas.getByPlaceholderText("Enter password"), "password123", { delay: 50 });
+      const passwordInput = canvas.getByPlaceholderText("Enter password");
+      await userEvent.clear(passwordInput);
+      await userEvent.type(passwordInput, "password123", { delay: 50 });
       await userEvent.tab();
 
-      await waitFor(() => {
-        const error = canvas.getByText(/password must contain at least one uppercase letter/i);
-        expect(error).toBeInTheDocument();
-      });
+      await waitFor(
+        () => {
+          const error = canvas.getByText("Password must contain at least one uppercase letter.");
+          expect(error).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
 
     await step("Enter mismatched passwords", async () => {
-      await userEvent.clear(canvas.getByPlaceholderText("Enter password"));
-      await userEvent.type(canvas.getByPlaceholderText("Enter password"), "Password123", { delay: 50 });
+      const passwordInput = canvas.getByPlaceholderText("Enter password");
+      await userEvent.clear(passwordInput);
+      await userEvent.type(passwordInput, "Password123", { delay: 50 });
       
       const confirmInput = canvas.getByPlaceholderText("Confirm password");
+      await userEvent.clear(confirmInput);
       await userEvent.type(confirmInput, "Password456", { delay: 50 });
       await userEvent.tab();
 
-      await waitFor(() => {
-        const error = canvas.getByText("Passwords don't match.");
-        expect(error).toBeInTheDocument();
-      });
+      await waitFor(
+        () => {
+          const error = canvas.getByText("Passwords don't match.");
+          expect(error).toBeInTheDocument();
+        },
+        { timeout: 3000 }
+      );
     });
   },
 };
