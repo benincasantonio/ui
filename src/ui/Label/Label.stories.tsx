@@ -58,10 +58,18 @@ export const WithInputRequired: Story = {
 export const WithInputDisabled: Story = {
   render: () => (
     <div className="grid w-full max-w-sm items-center gap-3">
-      <Label htmlFor="disabled-input" className="peer-disabled:cursor-not-allowed peer-disabled:opacity-50">
+      <Label
+        htmlFor="disabled-input"
+        className="peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+      >
         Disabled Input
       </Label>
-      <Input type="text" id="disabled-input" placeholder="This input is disabled" disabled />
+      <Input
+        type="text"
+        id="disabled-input"
+        placeholder="This input is disabled"
+        disabled
+      />
     </div>
   ),
 };
@@ -79,7 +87,11 @@ export const MultipleLabels: Story = {
       </div>
       <div className="grid items-center gap-3">
         <Label htmlFor="confirm-password">Confirm Password</Label>
-        <Input type="password" id="confirm-password" placeholder="Confirm password" />
+        <Input
+          type="password"
+          id="confirm-password"
+          placeholder="Confirm password"
+        />
       </div>
     </div>
   ),
@@ -91,7 +103,11 @@ export const CustomStyling: Story = {
       <Label htmlFor="custom" className="text-lg font-bold text-primary">
         Custom Styled Label
       </Label>
-      <Input type="text" id="custom" placeholder="Input with custom label styling" />
+      <Input
+        type="text"
+        id="custom"
+        placeholder="Input with custom label styling"
+      />
     </div>
   ),
 };
@@ -102,15 +118,15 @@ export const WithDescription: Story = {
       <div className="grid gap-1.5">
         <Label htmlFor="description-input">Description</Label>
         <p className="text-muted-foreground text-sm">
-          This is a description that provides additional context for the input field.
+          This is a description that provides additional context for the input
+          field.
         </p>
       </div>
-      <Input type="text" id="description-input" placeholder="Enter description" />
+      <Input
+        type="text"
+        id="description-input"
+        placeholder="Enter description"
+      />
     </div>
   ),
 };
-
-
-
-
-
