@@ -7,3 +7,4 @@ export * from "./Tabs/Tabs";
 export * from "./Skeleton/Skeleton";
 export * from "./Spinner/Spinner";
 export * from "./NavigationMenu/NavigationMenu";
+export * from "./DropdownMenu/DropdownMenu";
