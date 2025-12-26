@@ -8,3 +8,5 @@ export * from "./Skeleton/Skeleton";
 export * from "./Spinner/Spinner";
 export * from "./NavigationMenu/NavigationMenu";
 export * from "./DropdownMenu/DropdownMenu";
+export * from "./Command/Command";
+export * from "./Dialog/Dialog";
