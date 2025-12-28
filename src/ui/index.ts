@@ -12,3 +12,4 @@ export * from "./Command/Command";
 export * from "./Dialog/Dialog";
 export * from "./Popover/Popover";
 export * from "./Autocomplete/Autocomplete";
+export * from "./Textarea/Textarea";
