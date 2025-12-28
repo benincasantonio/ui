@@ -10,3 +10,4 @@ export * from "./NavigationMenu/NavigationMenu";
 export * from "./DropdownMenu/DropdownMenu";
 export * from "./Command/Command";
 export * from "./Dialog/Dialog";
+export * from "./Popover/Popover";
