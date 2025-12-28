@@ -1,5 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Popover, PopoverTrigger, PopoverContent, PopoverAnchor } from "./Popover";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverAnchor,
+} from "./Popover";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { Label } from "../Label/Label";
@@ -196,9 +201,7 @@ export const Controlled: Story = {
       <div className="space-y-4">
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <Button variant="outline">
-              {open ? "Close" : "Open"} Popover
-            </Button>
+            <Button variant="outline">{open ? "Close" : "Open"} Popover</Button>
           </PopoverTrigger>
           <PopoverContent>
             <div className="space-y-2">
