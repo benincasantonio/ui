@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Autocomplete } from "./Autocomplete";
-import { fn } from "storybook/test";
 import * as React from "react";
 
 /**
@@ -70,16 +69,14 @@ const meta = {
     },
     items: {
       control: "object",
-      description:
-        "Array of items to display. Each item must have `value` and `label` properties.",
+      description: "Array of items to display. Each item must have `value` and `label` properties.",
       table: {
         type: { summary: "Array<{ value: string; label: string }>" },
       },
     },
     placeholder: {
       control: "text",
-      description:
-        "Placeholder text shown in the trigger button when no value is selected.",
+      description: "Placeholder text shown in the trigger button when no value is selected.",
       table: {
         type: { summary: "string" },
         defaultValue: { summary: "Select an option..." },
@@ -118,8 +115,7 @@ const meta = {
       },
     },
     onValueChange: {
-      description:
-        "Callback fired when a value is selected. Use for controlled component pattern.",
+      description: "Callback fired when a value is selected. Use for controlled component pattern.",
       table: {
         type: { summary: "(value: string) => void" },
       },
@@ -178,14 +174,12 @@ export const Controlled: Story = {
           onValueChange={setValue}
         />
         <div className="rounded-md border p-3 text-center text-sm">
-          <div className="text-muted-foreground mb-1 font-medium">
-            Selected Value:
-          </div>
+          <div className="text-muted-foreground mb-1 font-medium">Selected Value:</div>
           <div className="font-mono">{value || "(none)"}</div>
         </div>
         <button
           onClick={() => setValue("")}
-          className="w-full rounded-md bg-secondary px-3 py-2 text-sm hover:bg-secondary/80"
+          className="bg-secondary hover:bg-secondary/80 w-full rounded-md px-3 py-2 text-sm"
         >
           Clear Selection
         </button>
@@ -195,8 +189,7 @@ export const Controlled: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Demonstrates how to control the selected value from parent component.",
+        story: "Demonstrates how to control the selected value from parent component.",
       },
     },
   },
@@ -210,9 +203,7 @@ export const Controlled: Story = {
 export const ServerSideFiltering: Story = {
   render: function ServerSideExample() {
     const [value, setValue] = React.useState<string>("");
-    const [items, setItems] = React.useState<
-      { value: string; label: string }[]
-    >([]);
+    const [items, setItems] = React.useState<{ value: string; label: string }[]>([]);
     const [isLoading, setIsLoading] = React.useState(false);
 
     // Simulated API data - in real app, this would come from your backend
@@ -243,7 +234,7 @@ export const ServerSideFiltering: Story = {
       // Filter results based on search term
       const filtered = searchTerm
         ? allCountries.filter((country) =>
-            country.label.toLowerCase().includes(searchTerm.toLowerCase()),
+            country.label.toLowerCase().includes(searchTerm.toLowerCase())
           )
         : allCountries;
 
@@ -269,9 +260,7 @@ export const ServerSideFiltering: Story = {
           onValueChange={setValue}
         />
         <div className="rounded-md border p-3 text-center text-sm">
-          <div className="text-muted-foreground mb-1 font-medium">
-            API Status:
-          </div>
+          <div className="text-muted-foreground mb-1 font-medium">API Status:</div>
           <div className="flex items-center justify-center gap-2">
             {isLoading ? (
               <>
@@ -340,8 +329,7 @@ export const LoadingState: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Displays loading state with spinner while data is being fetched.",
+        story: "Displays loading state with spinner while data is being fetched.",
       },
     },
   },
@@ -382,7 +370,7 @@ export const LargeDataset: Story = {
           value: `item-${i}`,
           label: `Item ${i + 1} - ${["Alpha", "Beta", "Gamma", "Delta", "Epsilon"][i % 5]}`,
         })),
-      [],
+      []
     );
 
     return (
@@ -396,9 +384,7 @@ export const LargeDataset: Story = {
           onValueChange={setValue}
         />
         <div className="rounded-md border p-3 text-center text-sm">
-          <div className="text-muted-foreground mb-1 text-xs">
-            Total: {items.length} items
-          </div>
+          <div className="text-muted-foreground mb-1 text-xs">Total: {items.length} items</div>
           <div className="font-mono text-xs">{value || "(none selected)"}</div>
         </div>
       </div>
@@ -407,8 +393,7 @@ export const LargeDataset: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Efficiently handles large datasets (1000+ items) with fast client-side filtering.",
+        story: "Efficiently handles large datasets (1000+ items) with fast client-side filtering.",
       },
     },
   },
@@ -491,23 +476,19 @@ export const FormIntegration: Story = {
             placeholder="Select your department..."
             filterPlaceholder="Search departments..."
             items={departments}
-            onValueChange={(value) =>
-              setFormData({ ...formData, department: value })
-            }
+            onValueChange={(value) => setFormData({ ...formData, department: value })}
           />
-          {errors.department && (
-            <p className="text-sm text-red-500">{errors.department}</p>
-          )}
+          {errors.department && <p className="text-sm text-red-500">{errors.department}</p>}
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+          className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2 text-sm font-medium"
         >
           Submit
         </button>
 
-        <div className="rounded-md bg-muted p-3 text-xs">
+        <div className="bg-muted rounded-md p-3 text-xs">
           <div className="font-medium">Form State:</div>
           <pre className="mt-2">{JSON.stringify(formData, null, 2)}</pre>
         </div>

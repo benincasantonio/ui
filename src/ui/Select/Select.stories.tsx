@@ -534,7 +534,7 @@ export const FormIntegration: Story = {
 
       // Wait for success message
       const successMessage = await canvas.findByText(
-        (content, element) => {
+        (_content, element) => {
           return element?.textContent?.includes("Form submitted successfully") ?? false;
         },
         {},
