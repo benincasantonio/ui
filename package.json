@@ -1,7 +1,7 @@
 {
   "name": "@antoniobenincasa/ui",
   "author": "Antonio Benincasa",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -51,6 +51,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
+    "recharts": "2.15.4",
     "tailwind-merge": "^3.4.0"
   },
   "devDependencies": {
