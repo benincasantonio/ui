@@ -42,10 +42,10 @@ const meta = {
       description: "Custom CSS classes for styling the chart container",
     },
   },
-} satisfies Meta<any>;
+} satisfies Meta<typeof ChartContainer>;
 
 export default meta;
-type Story = StoryObj<any>;
+type Story = StoryObj<typeof ChartContainer>;
 
 // Sample data for demonstrations
 const monthlyData = [
