@@ -21,6 +21,7 @@ type AutocompleteProps = {
   filterPlaceholder?: string;
   emptyMessage?: string;
   isLoading?: boolean;
+  disabled?: boolean;
   onFilterChange?: (value: string) => void;
   onValueChange?: (value: string) => void;
 };
@@ -47,7 +48,6 @@ export const Autocomplete = (props: AutocompleteProps) => {
     if (!filterChangeCallbackRef.current) return;
 
     const timeout = setTimeout(() => {
-      console.log("Filtering with value:", filterValue);
       filterChangeCallbackRef.current!(filterValue);
     }, 300);
 
@@ -74,7 +74,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-full justify-between">
+        <Button variant="outline" className="w-full justify-between" disabled={props.disabled}>
           {!props.value && (
             <div className="text-muted-foreground">{props.placeholder}</div>
           )}

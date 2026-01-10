@@ -356,9 +356,28 @@ export const EmptyState: Story = {
 };
 
 /**
- * Large dataset example.
- * Autocomplete handles large lists efficiently with virtualization from cmdk.
+ * Disabled state example.
+ * Shows the autocomplete when disabled - the trigger button is not interactive.
  */
+export const Disabled: Story = {
+  args: {
+    placeholder: "Select an option...",
+    filterPlaceholder: "Search...",
+    disabled: true,
+    items: [
+      { value: "1", label: "Option 1" },
+      { value: "2", label: "Option 2" },
+      { value: "3", label: "Option 3" },
+    ],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: "Shows the autocomplete in a disabled state, preventing user interaction.",
+      },
+    },
+  },
+};
 export const LargeDataset: Story = {
   render: function LargeDatasetExample() {
     const [value, setValue] = React.useState<string>("");
