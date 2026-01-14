@@ -44,11 +44,26 @@ export default defineConfig(({mode}) => {
         formats: ["es", "cjs"],
       },
       rolldownOptions: {
-        external: ["react", "react-dom", "lucide-react"],
+        external: [
+          // React and its internals
+          "react",
+          "react-dom",
+          "react/jsx-runtime",
+          "react/jsx-dev-runtime",
+          "react-dom/client",
+          // Peer dependencies
+          "lucide-react",
+          "react-hook-form",
+          "@hookform/resolvers",
+          "@hookform/resolvers/zod",
+          "zod",
+          "tailwindcss",
+        ],
         output: {
           globals: {
             react: "React",
             "react-dom": "ReactDOM",
+            "react/jsx-runtime": "ReactJSXRuntime",
             "lucide-react": "LucideReact",
           },
         },
