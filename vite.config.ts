@@ -1,4 +1,3 @@
-/// <reference types="vitest/config" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -8,6 +7,7 @@ import { fileURLToPath } from "node:url";
 import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
 import tailwindcss from "@tailwindcss/vite";
 import dts from "vite-plugin-dts";
+import { playwright } from "@vitest/browser-playwright";
 
 const dirname =
   typeof __dirname !== "undefined" ? __dirname : path.dirname(fileURLToPath(import.meta.url));
@@ -16,10 +16,8 @@ const dirname =
 export default defineConfig(({mode}) => {
   const isBuildingLibrary = mode === "library";
   
-  console.log(`Building in ${mode} mode. isBuildingLibrary: ${isBuildingLibrary}`);
-
   const shouldIncludeTailwind = !isBuildingLibrary;
-  console.log(`Including Tailwind CSS plugin: ${shouldIncludeTailwind}`);
+  
   return {
     plugins: [
       react(),
@@ -111,7 +109,7 @@ export default defineConfig(({mode}) => {
             browser: {
               enabled: true,
               headless: true,
-              provider: "playwright",
+              provider: playwright(),
               instances: [
                 {
                   browser: "chromium",
