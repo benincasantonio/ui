@@ -1,3 +1,4 @@
+export * from "./AlertDialog/AlertDialog";
 export * from "./Button/Button";
 export * from "./Input/Input";
 export * from "./Card/Card";
