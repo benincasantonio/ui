@@ -1,9 +1,3 @@
-.checkbox-wrapper {
-    display: inline-flex;
-    align-items: center;
-    position: relative;
-}
-
 .checkbox {
     appearance: none;
     -webkit-appearance: none;
