@@ -16,3 +16,4 @@ export * from "./Autocomplete/Autocomplete";
 export * from "./Textarea/Textarea";
 export * from "./Select/Select";
 export * from "./Chart/Chart";
+export * from "./Checkbox/Checkbox";
