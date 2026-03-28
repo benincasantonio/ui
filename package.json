@@ -99,6 +99,10 @@
 		"vitest": "^4.0.17",
 		"zod": "^4.1.13"
 	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
 	"peerDependencies": {
 		"@hookform/resolvers": "^5.2.2",
 		"lucide-react": "^0.562.0",
