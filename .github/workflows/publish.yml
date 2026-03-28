@@ -30,6 +30,13 @@ jobs:
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Setup Node
+        if: steps.check.outputs.exists == 'false'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+
       - name: Setup Bun
         if: steps.check.outputs.exists == 'false'
         uses: oven-sh/setup-bun@v2
