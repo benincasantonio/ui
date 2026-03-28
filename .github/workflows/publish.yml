@@ -51,4 +51,5 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+          echo "@antoniobenincasa:registry=https://registry.npmjs.org/" >> ~/.npmrc
           npm publish --access public
