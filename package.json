@@ -99,9 +99,14 @@
 		"vitest": "^4.0.17",
 		"zod": "^4.1.13"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/benincasantonio/ui.git"
+	},
 	"publishConfig": {
 		"access": "public",
-		"registry": "https://registry.npmjs.org/"
+		"registry": "https://registry.npmjs.org/",
+		"provenance": true
 	},
 	"peerDependencies": {
 		"@hookform/resolvers": "^5.2.2",
