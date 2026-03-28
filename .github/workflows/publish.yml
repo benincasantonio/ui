@@ -48,10 +48,6 @@ jobs:
           git tag ${{ steps.version.outputs.version }}
           git push origin ${{ steps.version.outputs.version }}
 
-      - name: Install latest npm
-        if: steps.check.outputs.exists == 'false'
-        run: npm install -g npm@latest
-
       - name: Publish to npm
         if: steps.check.outputs.exists == 'false'
         run: npm publish --provenance --access public
