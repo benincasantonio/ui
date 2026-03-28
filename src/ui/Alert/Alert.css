@@ -1,0 +1,127 @@
+/* ── Alert ── */
+.alert {
+    background-color: var(--background);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs, 4px);
+    border-left: 4px solid var(--alert-border-color);
+    padding: 0.75rem 1rem;
+    position: relative;
+}
+
+/* ── Variant border colors ── */
+.alert[data-variant="success"] {
+    --alert-border-color: var(--alert-success);
+}
+
+.alert[data-variant="info"] {
+    --alert-border-color: var(--alert-info);
+}
+
+.alert[data-variant="warning"] {
+    --alert-border-color: var(--alert-warning);
+}
+
+.alert[data-variant="danger"] {
+    --alert-border-color: var(--alert-danger);
+}
+
+/* ── Dismissible close button ── */
+.alert-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 0.125rem;
+    border-radius: var(--radius-xs, 4px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.alert-close:hover {
+    color: var(--foreground);
+    background-color: var(--accent);
+}
+
+/* ── Title & message ── */
+.alert-title {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+}
+
+.alert-message {
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+}
+
+/* ── Space for close button when dismissible ── */
+.alert--dismissible .alert-title,
+.alert--dismissible .alert-message {
+    padding-right: 1.5rem;
+}
+
+/* ── Inline animations (default) ── */
+@keyframes alert-exit {
+    from {
+        opacity: 1;
+        max-height: 200px;
+    }
+    to {
+        opacity: 0;
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-width: 0;
+    }
+}
+
+.alert[data-context="inline"].alert--dismissing {
+    animation: alert-exit 0.3s ease-in forwards;
+    overflow: hidden;
+}
+
+/* ── Notification animations ── */
+@keyframes notification-enter {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes notification-exit {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+        max-height: 200px;
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+        max-height: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+}
+
+.alert[data-context="notification"] {
+    pointer-events: auto;
+    box-shadow: 0 4px 12px oklch(0 0 0 / 10%);
+    animation: notification-enter 0.3s ease-out;
+}
+
+.alert[data-context="notification"].alert--dismissing {
+    animation: notification-exit 0.3s ease-in forwards;
+    overflow: hidden;
+}
