@@ -70,7 +70,7 @@ export const WithCustomColor: Story = {
 
 export const WithText: Story = {
   render: () => (
-    <div className="flex items-center gap-2">
+    <div className="flex gap-2 items-center">
       <Spinner />
       <span>Loading...</span>
     </div>
@@ -87,8 +87,9 @@ export const WithText: Story = {
 export const InButton: Story = {
   render: () => (
     <button
+      type="button"
       disabled
-      className="inline-flex items-center gap-2 rounded-md bg-primary px-4 py-2 text-primary-foreground"
+      className="inline-flex gap-2 items-center py-2 px-4 rounded-md bg-primary text-primary-foreground"
     >
       <Spinner className="size-4" />
       <span>Processing...</span>
@@ -108,12 +109,10 @@ export const InButton: Story = {
 
 export const InCard: Story = {
   render: () => (
-    <div className="w-[300px] rounded-lg border p-6">
-      <div className="flex flex-col items-center justify-center gap-4">
+    <div className="p-6 rounded-lg border w-[300px]">
+      <div className="flex flex-col gap-4 justify-center items-center">
         <Spinner className="size-8" />
-        <p className="text-sm text-muted-foreground">
-          Loading your content...
-        </p>
+        <p className="text-sm text-muted-foreground">Loading your content...</p>
       </div>
     </div>
   ),
@@ -129,24 +128,24 @@ export const InCard: Story = {
 
 export const MultipleSizes: Story = {
   render: () => (
-    <div className="flex items-center gap-6">
-      <div className="flex flex-col items-center gap-2">
+    <div className="flex gap-6 items-center">
+      <div className="flex flex-col gap-2 items-center">
         <Spinner className="size-3" />
         <span className="text-xs text-muted-foreground">XS</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col gap-2 items-center">
         <Spinner className="size-4" />
         <span className="text-xs text-muted-foreground">SM</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col gap-2 items-center">
         <Spinner className="size-6" />
         <span className="text-xs text-muted-foreground">MD</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col gap-2 items-center">
         <Spinner className="size-8" />
         <span className="text-xs text-muted-foreground">LG</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
+      <div className="flex flex-col gap-2 items-center">
         <Spinner className="size-12" />
         <span className="text-xs text-muted-foreground">XL</span>
       </div>
@@ -167,21 +166,21 @@ export const MultipleSizes: Story = {
 
 export const ColorVariants: Story = {
   render: () => (
-    <div className="flex items-center gap-6">
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-6 text-primary" />
+    <div className="flex gap-6 items-center">
+      <div className="flex flex-col gap-2 items-center">
+        <Spinner className="text-primary size-6" />
         <span className="text-xs text-muted-foreground">Primary</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-6 text-secondary-foreground" />
+      <div className="flex flex-col gap-2 items-center">
+        <Spinner className="text-secondary-foreground size-6" />
         <span className="text-xs text-muted-foreground">Secondary</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-6 text-destructive" />
+      <div className="flex flex-col gap-2 items-center">
+        <Spinner className="text-destructive size-6" />
         <span className="text-xs text-muted-foreground">Destructive</span>
       </div>
-      <div className="flex flex-col items-center gap-2">
-        <Spinner className="size-6 text-muted-foreground" />
+      <div className="flex flex-col gap-2 items-center">
+        <Spinner className="text-muted-foreground size-6" />
         <span className="text-xs text-muted-foreground">Muted</span>
       </div>
     </div>
@@ -201,14 +200,12 @@ export const ColorVariants: Story = {
 
 export const FullPageLoader: Story = {
   render: () => (
-    <div className="flex h-[400px] w-[600px] items-center justify-center rounded-lg border bg-background">
-      <div className="flex flex-col items-center gap-4">
+    <div className="flex justify-center items-center rounded-lg border bg-background h-[400px] w-[600px]">
+      <div className="flex flex-col gap-4 items-center">
         <Spinner className="size-12" />
         <div className="text-center">
           <h3 className="font-semibold">Loading</h3>
-          <p className="text-sm text-muted-foreground">
-            Please wait while we fetch your data
-          </p>
+          <p className="text-sm text-muted-foreground">Please wait while we fetch your data</p>
         </div>
       </div>
     </div>
@@ -219,9 +216,7 @@ export const FullPageLoader: Story = {
       expect(spinner).toBeInTheDocument();
       expect(spinner).toHaveClass("size-12");
       expect(canvasElement.textContent).toContain("Loading");
-      expect(canvasElement.textContent).toContain(
-        "Please wait while we fetch your data",
-      );
+      expect(canvasElement.textContent).toContain("Please wait while we fetch your data");
     });
   },
 };

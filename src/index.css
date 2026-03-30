@@ -112,5 +112,5 @@
   --alert-success: oklch(0.72 0.19 145);
   --alert-info: oklch(0.65 0.19 255);
   --alert-warning: oklch(0.82 0.18 85);
-  --alert-danger: oklch(0.70 0.19 22);
+  --alert-danger: oklch(0.7 0.19 22);
 }

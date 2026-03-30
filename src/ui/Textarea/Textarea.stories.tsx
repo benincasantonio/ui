@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Textarea } from "./Textarea";
-import { expect, userEvent, within } from "storybook/test";
 import * as React from "react";
+import { expect, userEvent, within } from "storybook/test";
+import { Textarea } from "./Textarea";
 
 /**
  * # Textarea Component
@@ -164,7 +164,7 @@ export const WithCharacterLimit: Story = {
     const maxLength = 200;
 
     return (
-      <div className="w-96 space-y-2">
+      <div className="space-y-2 w-96">
         <Textarea
           placeholder="Enter your message (max 200 characters)..."
           value={value}
@@ -172,7 +172,7 @@ export const WithCharacterLimit: Story = {
           onChange={(e) => setValue(e.target.value)}
           aria-describedby="char-count"
         />
-        <div id="char-count" className="text-muted-foreground text-right text-xs">
+        <div id="char-count" className="text-xs text-right text-muted-foreground">
           {value.length} / {maxLength} characters
         </div>
       </div>
@@ -205,21 +205,22 @@ export const Controlled: Story = {
     const [value, setValue] = React.useState("");
 
     return (
-      <div className="w-96 space-y-4">
+      <div className="space-y-4 w-96">
         <Textarea
           placeholder="Type something..."
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <div className="rounded-md border p-3">
-          <div className="text-muted-foreground mb-2 text-xs font-medium">Current Value:</div>
-          <div className="bg-muted rounded p-2 text-sm">
-            {value || <span className="text-muted-foreground italic">(empty)</span>}
+        <div className="p-3 rounded-md border">
+          <div className="mb-2 text-xs font-medium text-muted-foreground">Current Value:</div>
+          <div className="p-2 text-sm rounded bg-muted">
+            {value || <span className="italic text-muted-foreground">(empty)</span>}
           </div>
         </div>
         <button
+          type="button"
           onClick={() => setValue("")}
-          className="bg-secondary hover:bg-secondary/80 w-full rounded-md px-3 py-2 text-sm"
+          className="py-2 px-3 w-full text-sm rounded-md bg-secondary hover:bg-secondary/80"
         >
           Clear
         </button>
@@ -246,7 +247,7 @@ export const WithValidation: Story = {
     const isInvalid = touched && value.length > 0 && value.length < minLength;
 
     return (
-      <div className="w-96 space-y-2">
+      <div className="space-y-2 w-96">
         <label htmlFor="message" className="text-sm font-medium">
           Message *
         </label>
@@ -339,7 +340,7 @@ export const FormIntegration: Story = {
     };
 
     return (
-      <form onSubmit={handleSubmit} className="w-96 space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 w-96">
         <div className="space-y-2">
           <label htmlFor="title" className="text-sm font-medium">
             Title *
@@ -349,7 +350,7 @@ export const FormIntegration: Story = {
             type="text"
             value={formData.title}
             onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-            className="border-input w-full rounded-md border px-3 py-2 text-sm"
+            className="py-2 px-3 w-full text-sm rounded-md border border-input"
             placeholder="Enter a title..."
           />
           {errors.title && <p className="text-sm text-red-500">{errors.title}</p>}
@@ -371,13 +372,13 @@ export const FormIntegration: Story = {
 
         <button
           type="submit"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2 text-sm font-medium"
+          className="py-2 px-4 w-full text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
 
         {submitted && (
-          <div className="rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-800">
+          <div className="p-3 text-sm text-green-800 bg-green-50 rounded-md border border-green-200">
             ✓ Form submitted successfully!
           </div>
         )}
@@ -445,14 +446,14 @@ export const FormIntegration: Story = {
  */
 export const CustomStyling: Story = {
   render: () => (
-    <div className="w-96 space-y-4">
+    <div className="space-y-4 w-96">
       <Textarea
         placeholder="Custom styled textarea with monospace font..."
-        className="min-h-32 resize-none"
+        className="resize-none min-h-32"
       />
-      <div className="rounded-md border p-3 text-xs">
+      <div className="p-3 text-xs rounded-md border">
         <div className="font-medium">Applied styles:</div>
-        <ul className="text-muted-foreground mt-2 space-y-1">
+        <ul className="mt-2 space-y-1 text-muted-foreground">
           <li>• min-h-32 (minimum height)</li>
           <li>• resize-none (disable resizing)</li>
           <li>• font-mono (monospace font)</li>

@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Copy } from "lucide-react";
 import { expect, userEvent, waitFor } from "storybook/test";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-  DialogClose,
-} from "./Dialog";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { Label } from "../Label/Label";
-import { Copy } from "lucide-react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./Dialog";
 
 const meta = {
   title: "Components/Dialog",
@@ -50,25 +50,17 @@ export const Default: Story = {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 gap-4 items-center">
             <Label htmlFor="name" className="text-right">
               Name
             </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
+            <Input id="name" defaultValue="Pedro Duarte" className="col-span-3" />
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
+          <div className="grid grid-cols-4 gap-4 items-center">
             <Label htmlFor="username" className="text-right">
               Username
             </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
+            <Input id="username" defaultValue="@peduarte" className="col-span-3" />
           </div>
         </div>
         <DialogFooter>
@@ -79,9 +71,7 @@ export const Default: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open dialog", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dialog-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dialog-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -101,24 +91,18 @@ export const CustomContent: Story = {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Share link</DialogTitle>
-          <DialogDescription>
-            Anyone who has this link will be able to view this.
-          </DialogDescription>
+          <DialogDescription>Anyone who has this link will be able to view this.</DialogDescription>
         </DialogHeader>
         <div className="flex items-center space-x-2">
           <div className="grid flex-1 gap-2">
             <Label htmlFor="link" className="sr-only">
               Link
             </Label>
-            <Input
-              id="link"
-              defaultValue="https://ui.shadcn.com/docs/installation"
-              readOnly
-            />
+            <Input id="link" defaultValue="https://ui.shadcn.com/docs/installation" readOnly />
           </div>
           <Button type="submit" size="sm" className="px-3">
             <span className="sr-only">Copy</span>
-            <Copy className="h-4 w-4" />
+            <Copy className="w-4 h-4" />
           </Button>
         </div>
         <DialogFooter className="sm:justify-start">
@@ -143,8 +127,8 @@ export const Destructive: Story = {
         <DialogHeader>
           <DialogTitle>Are you absolutely sure?</DialogTitle>
           <DialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            This action cannot be undone. This will permanently delete your account and remove your
+            data from our servers.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
@@ -168,8 +152,8 @@ export const NoCloseButton: Story = {
         <DialogHeader>
           <DialogTitle>Notification</DialogTitle>
           <DialogDescription>
-            This dialog does not have the "X" close button in the top right.
-            You must use the action buttons below.
+            This dialog does not have the "X" close button in the top right. You must use the action
+            buttons below.
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>

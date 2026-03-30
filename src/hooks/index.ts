@@ -1,6 +1,6 @@
 export {
-    useNotification,
-    type NotificationData,
-    type NotificationVariant,
-    type NotificationContextValue,
+  type NotificationContextValue,
+  type NotificationData,
+  type NotificationVariant,
+  useNotification,
 } from "./useNotification";

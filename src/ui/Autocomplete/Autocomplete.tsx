@@ -1,6 +1,7 @@
-import { Popover, PopoverContent, PopoverTrigger } from "../Popover/Popover";
-import { Button } from "../Button/Button";
 import { CheckIcon, ChevronsUpDown } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
+import { Button } from "../Button/Button";
 import {
   Command,
   CommandEmpty,
@@ -9,10 +10,8 @@ import {
   CommandItem,
   CommandList,
 } from "../Command/Command";
-
-import { useState, useEffect, useRef } from "react";
+import { Popover, PopoverContent, PopoverTrigger } from "../Popover/Popover";
 import { Spinner } from "../Spinner/Spinner";
-import { cn } from "@/lib/utils";
 
 type AutocompleteProps = {
   value?: string;
@@ -31,9 +30,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
   const [open, setOpen] = useState(false);
   const filterChangeCallbackRef = useRef(props.onFilterChange);
   const [selectedLabel, setSelectedLabel] = useState(
-    props.value
-      ? props.items?.find((item) => item.value === props.value)?.label || ""
-      : "",
+    props.value ? props.items?.find((item) => item.value === props.value)?.label || "" : ""
   );
 
   const onFilterChange = (value: string) => {
@@ -48,7 +45,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
     if (!filterChangeCallbackRef.current) return;
 
     const timeout = setTimeout(() => {
-      filterChangeCallbackRef.current!(filterValue);
+      filterChangeCallbackRef.current?.(filterValue);
     }, 300);
 
     return () => {
@@ -74,20 +71,14 @@ export const Autocomplete = (props: AutocompleteProps) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="w-full justify-between" disabled={props.disabled}>
-          {!props.value && (
-            <div className="text-muted-foreground">{props.placeholder}</div>
-          )}
-          {props.value && (
-            <div className="truncate">{selectedLabel || props.value}</div>
-          )}
-          {props.isLoading && <Spinner className="ml-2 h-4 w-4 shrink-0" />}
-          {!props.isLoading && (
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0" />
-          )}
+        <Button variant="outline" className="justify-between w-full" disabled={props.disabled}>
+          {!props.value && <div className="text-muted-foreground">{props.placeholder}</div>}
+          {props.value && <div className="truncate">{selectedLabel || props.value}</div>}
+          {props.isLoading && <Spinner className="ml-2 w-4 h-4 shrink-0" />}
+          {!props.isLoading && <ChevronsUpDown className="ml-2 w-4 h-4 shrink-0" />}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
+      <PopoverContent className="p-0 w-[--radix-popover-trigger-width]">
         <Command shouldFilter={!props.onFilterChange}>
           <CommandInput
             value={filterValue}
@@ -95,9 +86,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
             onValueChange={onFilterChange}
           ></CommandInput>
           <CommandList>
-            <CommandEmpty className="p-2">
-              {props.emptyMessage || "No results found."}
-            </CommandEmpty>
+            <CommandEmpty className="p-2">{props.emptyMessage || "No results found."}</CommandEmpty>
             <CommandGroup>
               {props.items?.map((item) => (
                 <CommandItem
@@ -114,7 +103,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
                     className={cn(
                       "ml-auto size-4",
                       props.value === item.value && "opacity-100",
-                      props.value !== item.value && "opacity-0",
+                      props.value !== item.value && "opacity-0"
                     )}
                   />
                 </CommandItem>

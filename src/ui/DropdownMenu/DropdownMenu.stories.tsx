@@ -1,36 +1,36 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, userEvent, waitFor } from "storybook/test";
 import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuLabel,
-  DropdownMenuCheckboxItem,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuGroup,
-} from "./DropdownMenu";
-import { Button } from "../Button/Button";
-import {
-  User,
-  Settings,
+  Cloud,
+  Github,
+  Keyboard,
+  LifeBuoy,
   LogOut,
   Mail,
   MessageSquare,
   PlusCircle,
+  Settings,
+  User,
   Users,
-  Cloud,
-  Github,
-  LifeBuoy,
-  Keyboard,
 } from "lucide-react";
 import * as React from "react";
+import { expect, userEvent, waitFor } from "storybook/test";
+import { Button } from "../Button/Button";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./DropdownMenu";
 
 const meta = {
   title: "Components/DropdownMenu",
@@ -69,9 +69,7 @@ export const Default: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Click trigger to open menu", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       expect(trigger).toBeInTheDocument();
 
       await userEvent.click(trigger!);
@@ -112,9 +110,7 @@ export const WithIcons: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify icons", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -158,9 +154,7 @@ export const WithLabelsAndSeparators: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify labels", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -186,22 +180,13 @@ export const WithCheckboxes: Story = {
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>Appearance</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuCheckboxItem
-            checked={showStatusBar}
-            onCheckedChange={setShowStatusBar}
-          >
+          <DropdownMenuCheckboxItem checked={showStatusBar} onCheckedChange={setShowStatusBar}>
             Status Bar
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={showActivityBar}
-            onCheckedChange={setShowActivityBar}
-          >
+          <DropdownMenuCheckboxItem checked={showActivityBar} onCheckedChange={setShowActivityBar}>
             Activity Bar
           </DropdownMenuCheckboxItem>
-          <DropdownMenuCheckboxItem
-            checked={showPanel}
-            onCheckedChange={setShowPanel}
-          >
+          <DropdownMenuCheckboxItem checked={showPanel} onCheckedChange={setShowPanel}>
             Panel
           </DropdownMenuCheckboxItem>
         </DropdownMenuContent>
@@ -210,9 +195,7 @@ export const WithCheckboxes: Story = {
   },
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify checkbox items", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -223,9 +206,7 @@ export const WithCheckboxes: Story = {
     });
 
     await step("Toggle checkbox item", async () => {
-      const checkboxItems = document.querySelectorAll(
-        '[data-slot="dropdown-menu-checkbox-item"]',
-      );
+      const checkboxItems = document.querySelectorAll('[data-slot="dropdown-menu-checkbox-item"]');
       await userEvent.click(checkboxItems[1] as Element);
 
       await waitFor(() => {
@@ -249,9 +230,7 @@ export const WithRadioGroup: Story = {
           <DropdownMenuSeparator />
           <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
             <DropdownMenuRadioItem value="top">Top</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="bottom">
-              Bottom
-            </DropdownMenuRadioItem>
+            <DropdownMenuRadioItem value="bottom">Bottom</DropdownMenuRadioItem>
             <DropdownMenuRadioItem value="right">Right</DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>
@@ -260,9 +239,7 @@ export const WithRadioGroup: Story = {
   },
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify radio items", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -273,9 +250,7 @@ export const WithRadioGroup: Story = {
     });
 
     await step("Select radio item", async () => {
-      const radioItems = document.querySelectorAll(
-        '[data-slot="dropdown-menu-radio-item"]',
-      );
+      const radioItems = document.querySelectorAll('[data-slot="dropdown-menu-radio-item"]');
       await userEvent.click(radioItems[2] as Element);
 
       await waitFor(() => {
@@ -316,9 +291,7 @@ export const WithShortcuts: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify shortcuts", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -373,9 +346,7 @@ export const WithSubMenus: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify sub-menu trigger", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -390,8 +361,8 @@ export const ProfileMenu: Story = {
   render: () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative size-10 rounded-full">
-          <div className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+        <Button variant="ghost" className="relative rounded-full size-10">
+          <div className="flex justify-center items-center rounded-full size-10 bg-primary text-primary-foreground">
             <User className="size-5" />
           </div>
         </Button>
@@ -440,9 +411,7 @@ export const ProfileMenu: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open profile menu", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -453,12 +422,8 @@ export const ProfileMenu: Story = {
     });
 
     await step("Verify destructive logout item", async () => {
-      const items = document.querySelectorAll(
-        '[data-slot="dropdown-menu-item"]',
-      );
-      const logoutItem = Array.from(items).find((item) =>
-        item.textContent?.includes("Logout"),
-      );
+      const items = document.querySelectorAll('[data-slot="dropdown-menu-item"]');
+      const logoutItem = Array.from(items).find((item) => item.textContent?.includes("Logout"));
       expect(logoutItem).toHaveAttribute("data-variant", "destructive");
     });
   },
@@ -475,17 +440,13 @@ export const DestructiveActions: Story = {
         <DropdownMenuItem>Duplicate</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">
-          Delete permanently
-        </DropdownMenuItem>
+        <DropdownMenuItem variant="destructive">Delete permanently</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify destructive items", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="dropdown-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="dropdown-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {

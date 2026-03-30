@@ -1,8 +1,11 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { expect, fn, userEvent, waitFor, within } from "storybook/test";
 import * as z from "zod";
-import { within, userEvent, expect, fn, waitFor } from "storybook/test";
+import { Button } from "../Button/Button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Card/Card";
+import { Input } from "../Input/Input";
 import {
   Form,
   FormControl,
@@ -12,9 +15,6 @@ import {
   FormLabel,
   FormMessage,
 } from "./Form";
-import { Input } from "../Input/Input";
-import { Button } from "../Button/Button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Card/Card";
 
 // Basic form schema
 const basicFormSchema = z.object({
@@ -26,20 +26,22 @@ const basicFormSchema = z.object({
 });
 
 // Complex form schema
-const complexFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters."),
-  email: z.string().email("Please enter a valid email address."),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters.")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter.")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter.")
-    .regex(/[0-9]/, "Password must contain at least one number."),
-  confirmPassword: z.string(),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match.",
-  path: ["confirmPassword"],
-});
+const complexFormSchema = z
+  .object({
+    name: z.string().min(2, "Name must be at least 2 characters."),
+    email: z.string().email("Please enter a valid email address."),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters.")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter.")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter.")
+      .regex(/[0-9]/, "Password must contain at least one number."),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match.",
+    path: ["confirmPassword"],
+  });
 
 type BasicFormValues = z.infer<typeof basicFormSchema>;
 type ComplexFormValues = z.infer<typeof complexFormSchema>;
@@ -89,9 +91,7 @@ function BasicFormExample() {
                   <FormControl>
                     <Input placeholder="shadcn" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This is your public display name.
-                  </FormDescription>
+                  <FormDescription>This is your public display name.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -105,9 +105,7 @@ function BasicFormExample() {
                   <FormControl>
                     <Input type="email" placeholder="name@example.com" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    We'll never share your email with anyone else.
-                  </FormDescription>
+                  <FormDescription>We'll never share your email with anyone else.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -403,7 +401,7 @@ export const PasswordValidation: Story = {
       const passwordInput = canvas.getByPlaceholderText("Enter password");
       await userEvent.clear(passwordInput);
       await userEvent.type(passwordInput, "Password123", { delay: 50 });
-      
+
       const confirmInput = canvas.getByPlaceholderText("Confirm password");
       await userEvent.clear(confirmInput);
       await userEvent.type(confirmInput, "Password456", { delay: 50 });
@@ -427,9 +425,15 @@ export const FormReset: Story = {
 
     await step("Fill in form fields", async () => {
       await userEvent.type(canvas.getByPlaceholderText("John Doe"), "John Doe", { delay: 50 });
-      await userEvent.type(canvas.getByPlaceholderText("john@example.com"), "john@example.com", { delay: 50 });
-      await userEvent.type(canvas.getByPlaceholderText("Enter password"), "Password123", { delay: 50 });
-      await userEvent.type(canvas.getByPlaceholderText("Confirm password"), "Password123", { delay: 50 });
+      await userEvent.type(canvas.getByPlaceholderText("john@example.com"), "john@example.com", {
+        delay: 50,
+      });
+      await userEvent.type(canvas.getByPlaceholderText("Enter password"), "Password123", {
+        delay: 50,
+      });
+      await userEvent.type(canvas.getByPlaceholderText("Confirm password"), "Password123", {
+        delay: 50,
+      });
     });
 
     await step("Reset form", async () => {
@@ -445,4 +449,3 @@ export const FormReset: Story = {
     });
   },
 };
-

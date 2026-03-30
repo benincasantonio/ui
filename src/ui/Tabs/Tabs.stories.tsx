@@ -1,19 +1,19 @@
-import * as React from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { within, userEvent, expect, waitFor } from "storybook/test";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "./Tabs";
+import { Bell, Lock, Mail, Settings, Shield, User } from "lucide-react";
+import * as React from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
+import { Button } from "../Button/Button";
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from "../Card/Card";
-import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { Label } from "../Label/Label";
-import { Settings, User, Lock, Mail, Bell, Shield } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./Tabs";
 
 const meta = {
   title: "Components/Tabs",
@@ -36,8 +36,7 @@ const meta = {
   argTypes: {
     defaultValue: {
       control: "text",
-      description:
-        "The value of the tab that should be active when initially rendered.",
+      description: "The value of the tab that should be active when initially rendered.",
     },
     value: {
       control: "text",
@@ -87,7 +86,7 @@ export const Default: Story = {
 
     await step("Verify initial tab is Account", async () => {
       const accountContent = canvas.getByText(
-        "Make changes to your account here. Click save when you're done.",
+        "Make changes to your account here. Click save when you're done."
       );
       expect(accountContent).toBeInTheDocument();
     });
@@ -98,26 +97,23 @@ export const Default: Story = {
 
       await waitFor(() => {
         const passwordContent = canvas.getByText(
-          "Change your password here. After saving, you'll be logged out.",
+          "Change your password here. After saving, you'll be logged out."
         );
         expect(passwordContent).toBeInTheDocument();
       });
     });
 
-    await step(
-      "Click Account tab and verify content changes back",
-      async () => {
-        const accountTab = canvas.getByRole("tab", { name: /account/i });
-        await userEvent.click(accountTab);
+    await step("Click Account tab and verify content changes back", async () => {
+      const accountTab = canvas.getByRole("tab", { name: /account/i });
+      await userEvent.click(accountTab);
 
-        await waitFor(() => {
-          const accountContent = canvas.getByText(
-            "Make changes to your account here. Click save when you're done.",
-          );
-          expect(accountContent).toBeInTheDocument();
-        });
-      },
-    );
+      await waitFor(() => {
+        const accountContent = canvas.getByText(
+          "Make changes to your account here. Click save when you're done."
+        );
+        expect(accountContent).toBeInTheDocument();
+      });
+    });
   },
 };
 
@@ -255,9 +251,7 @@ export const WithIcons: Story = {
         <Card>
           <CardHeader>
             <CardTitle>Settings</CardTitle>
-            <CardDescription>
-              Configure your application settings.
-            </CardDescription>
+            <CardDescription>Configure your application settings.</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
@@ -274,8 +268,7 @@ export const WithIcons: Story = {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
-              Update your password, enable two-factor authentication, and manage
-              security options.
+              Update your password, enable two-factor authentication, and manage security options.
             </p>
           </CardContent>
         </Card>
@@ -286,9 +279,7 @@ export const WithIcons: Story = {
     const canvas = within(canvasElement);
 
     await step("Verify Profile tab is initially active", async () => {
-      const profileDescription = canvas.getByText(
-        "Manage your profile information.",
-      );
+      const profileDescription = canvas.getByText("Manage your profile information.");
       expect(profileDescription).toBeInTheDocument();
     });
 
@@ -297,9 +288,7 @@ export const WithIcons: Story = {
       await userEvent.click(settingsTab);
 
       await waitFor(() => {
-        const settingsDescription = canvas.getByText(
-          "Configure your application settings.",
-        );
+        const settingsDescription = canvas.getByText("Configure your application settings.");
         expect(settingsDescription).toBeInTheDocument();
       });
     });
@@ -309,9 +298,7 @@ export const WithIcons: Story = {
       await userEvent.click(securityTab);
 
       await waitFor(() => {
-        const securityDescription = canvas.getByText(
-          "Manage your security settings.",
-        );
+        const securityDescription = canvas.getByText("Manage your security settings.");
         expect(securityDescription).toBeInTheDocument();
       });
     });
@@ -321,9 +308,7 @@ export const WithIcons: Story = {
       await userEvent.click(profileTab);
 
       await waitFor(() => {
-        const profileDescription = canvas.getByText(
-          "Manage your profile information.",
-        );
+        const profileDescription = canvas.getByText("Manage your profile information.");
         expect(profileDescription).toBeInTheDocument();
       });
     });
@@ -352,9 +337,7 @@ export const MultipleTabs: Story = {
         <Card>
           <CardHeader>
             <CardTitle>General Settings</CardTitle>
-            <CardDescription>
-              Manage your general account preferences.
-            </CardDescription>
+            <CardDescription>Manage your general account preferences.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
@@ -374,9 +357,7 @@ export const MultipleTabs: Story = {
         <Card>
           <CardHeader>
             <CardTitle>Notifications</CardTitle>
-            <CardDescription>
-              Configure how you receive notifications.
-            </CardDescription>
+            <CardDescription>Configure how you receive notifications.</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground">
@@ -395,11 +376,7 @@ export const MultipleTabs: Story = {
             <div className="grid gap-4">
               <div className="grid gap-2">
                 <Label htmlFor="email">Email Address</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  defaultValue="user@example.com"
-                />
+                <Input id="email" type="email" defaultValue="user@example.com" />
               </div>
             </div>
           </CardContent>
@@ -409,9 +386,7 @@ export const MultipleTabs: Story = {
         <Card>
           <CardHeader>
             <CardTitle>Security</CardTitle>
-            <CardDescription>
-              Manage your account security settings.
-            </CardDescription>
+            <CardDescription>Manage your account security settings.</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4">
@@ -436,9 +411,7 @@ export const MultipleTabs: Story = {
     const canvas = within(canvasElement);
 
     await step("Verify General tab is initially active", async () => {
-      const generalDescription = canvas.getByText(
-        "Manage your general account preferences.",
-      );
+      const generalDescription = canvas.getByText("Manage your general account preferences.");
       expect(generalDescription).toBeInTheDocument();
       const languageInput = canvas.getByLabelText("Language");
       expect(languageInput).toHaveValue("English");
@@ -452,7 +425,7 @@ export const MultipleTabs: Story = {
       await userEvent.click(notificationsTab);
       await waitFor(() => {
         const notificationsDescription = canvas.getByText(
-          "Configure how you receive notifications.",
+          "Configure how you receive notifications."
         );
         expect(notificationsDescription).toBeInTheDocument();
       });
@@ -461,9 +434,7 @@ export const MultipleTabs: Story = {
       const emailTab = canvas.getByRole("tab", { name: /email/i });
       await userEvent.click(emailTab);
       await waitFor(() => {
-        const emailDescription = canvas.getByText(
-          "Manage your email preferences.",
-        );
+        const emailDescription = canvas.getByText("Manage your email preferences.");
         expect(emailDescription).toBeInTheDocument();
         const emailInput = canvas.getByLabelText("Email Address");
         expect(emailInput).toHaveValue("user@example.com");
@@ -473,9 +444,7 @@ export const MultipleTabs: Story = {
       const securityTab = canvas.getByRole("tab", { name: /security/i });
       await userEvent.click(securityTab);
       await waitFor(() => {
-        const securityDescription = canvas.getByText(
-          "Manage your account security settings.",
-        );
+        const securityDescription = canvas.getByText("Manage your account security settings.");
         expect(securityDescription).toBeInTheDocument();
       });
 
@@ -483,9 +452,7 @@ export const MultipleTabs: Story = {
       const generalTab = canvas.getByRole("tab", { name: /general/i });
       await userEvent.click(generalTab);
       await waitFor(() => {
-        const generalDescription = canvas.getByText(
-          "Manage your general account preferences.",
-        );
+        const generalDescription = canvas.getByText("Manage your general account preferences.");
         expect(generalDescription).toBeInTheDocument();
       });
     });
@@ -509,9 +476,7 @@ export const DisabledTab: Story = {
         <p className="text-sm text-muted-foreground">This tab is disabled.</p>
       </TabsContent>
       <TabsContent value="another">
-        <p className="text-sm text-muted-foreground">
-          This is another active tab.
-        </p>
+        <p className="text-sm text-muted-foreground">This is another active tab.</p>
       </TabsContent>
     </Tabs>
   ),
@@ -560,29 +525,28 @@ export const SimpleContent: Story = {
         <TabsTrigger value="tab3">Tab Three</TabsTrigger>
       </TabsList>
       <TabsContent value="tab1" className="mt-4">
-        <div className="rounded-lg border p-6">
-          <h3 className="text-lg font-semibold mb-2">Content for Tab One</h3>
+        <div className="p-6 rounded-lg border">
+          <h3 className="mb-2 text-lg font-semibold">Content for Tab One</h3>
           <p className="text-sm text-muted-foreground">
-            This is the content displayed when Tab One is selected. You can put
-            any content here.
+            This is the content displayed when Tab One is selected. You can put any content here.
           </p>
         </div>
       </TabsContent>
       <TabsContent value="tab2" className="mt-4">
-        <div className="rounded-lg border p-6">
-          <h3 className="text-lg font-semibold mb-2">Content for Tab Two</h3>
+        <div className="p-6 rounded-lg border">
+          <h3 className="mb-2 text-lg font-semibold">Content for Tab Two</h3>
           <p className="text-sm text-muted-foreground">
-            This is the content displayed when Tab Two is selected. Each tab can
-            have different content.
+            This is the content displayed when Tab Two is selected. Each tab can have different
+            content.
           </p>
         </div>
       </TabsContent>
       <TabsContent value="tab3" className="mt-4">
-        <div className="rounded-lg border p-6">
-          <h3 className="text-lg font-semibold mb-2">Content for Tab Three</h3>
+        <div className="p-6 rounded-lg border">
+          <h3 className="mb-2 text-lg font-semibold">Content for Tab Three</h3>
           <p className="text-sm text-muted-foreground">
-            This is the content displayed when Tab Three is selected. Tabs help
-            organize related content.
+            This is the content displayed when Tab Three is selected. Tabs help organize related
+            content.
           </p>
         </div>
       </TabsContent>
@@ -648,43 +612,25 @@ export const Controlled: Story = {
             <TabsTrigger value="tab3">Tab 3</TabsTrigger>
           </TabsList>
           <TabsContent value="tab1">
-            <p className="text-sm text-muted-foreground">
-              Current tab: {value}
-            </p>
+            <p className="text-sm text-muted-foreground">Current tab: {value}</p>
           </TabsContent>
           <TabsContent value="tab2">
-            <p className="text-sm text-muted-foreground">
-              Current tab: {value}
-            </p>
+            <p className="text-sm text-muted-foreground">Current tab: {value}</p>
           </TabsContent>
           <TabsContent value="tab3">
-            <p className="text-sm text-muted-foreground">
-              Current tab: {value}
-            </p>
+            <p className="text-sm text-muted-foreground">Current tab: {value}</p>
           </TabsContent>
         </Tabs>
         <div className="text-sm text-muted-foreground">
           <p>Controlled value: {value}</p>
           <div className="flex gap-2 mt-2">
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setValue("tab1")}
-            >
+            <Button size="sm" variant="outline" onClick={() => setValue("tab1")}>
               Go to Tab 1
             </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setValue("tab2")}
-            >
+            <Button size="sm" variant="outline" onClick={() => setValue("tab2")}>
               Go to Tab 2
             </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setValue("tab3")}
-            >
+            <Button size="sm" variant="outline" onClick={() => setValue("tab3")}>
               Go to Tab 3
             </Button>
           </div>
