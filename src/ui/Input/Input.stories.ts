@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { Input } from "@/ui/Input/Input";
-import { within, userEvent, expect, fn } from "storybook/test";
 
 const meta = {
   title: "Components/Input",
@@ -61,7 +61,7 @@ export const Default: Story = {
         target: expect.objectContaining({
           value: "Hello",
         }),
-      }),
+      })
     );
   },
 };
@@ -87,7 +87,7 @@ export const Email: Story = {
   },
 };
 
-export const Number: Story = {
+export const NumberInput: Story = {
   args: {
     type: "number",
     placeholder: "Enter number",

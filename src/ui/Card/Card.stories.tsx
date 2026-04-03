@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Button } from "../Button/Button";
 import {
   Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-  CardAction,
 } from "./Card";
-import { Button } from "../Button/Button";
 
 const meta = {
   title: "Components/Card",
@@ -52,7 +52,9 @@ export const WithHeader: Story = {
     <Card>
       <CardHeader>
         <CardTitle>Card Title</CardTitle>
-        <CardDescription>This is a card description that provides additional context.</CardDescription>
+        <CardDescription>
+          This is a card description that provides additional context.
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <p>Card content goes here. This is where the main information is displayed.</p>
@@ -86,7 +88,9 @@ export const WithAction: Story = {
         <CardTitle>Card with Action</CardTitle>
         <CardDescription>This card has an action button in the header.</CardDescription>
         <CardAction>
-          <Button variant="ghost" size="icon">⋯</Button>
+          <Button variant="ghost" size="icon">
+            ⋯
+          </Button>
         </CardAction>
       </CardHeader>
       <CardContent>
@@ -141,7 +145,7 @@ export const Complex: Story = {
       <CardContent>
         <div className="space-y-2">
           <p className="font-medium">Feature List</p>
-          <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+          <ul className="space-y-1 text-sm list-disc list-inside text-muted-foreground">
             <li>Responsive design</li>
             <li>Accessible components</li>
             <li>Customizable styling</li>
@@ -171,7 +175,3 @@ export const CustomStyling: Story = {
     </Card>
   ),
 };
-
-
-
-

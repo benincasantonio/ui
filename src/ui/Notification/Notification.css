@@ -1,13 +1,13 @@
 /* ── Container ── */
 .notification-container {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: var(--z-index-notification);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 24rem;
-    width: calc(100% - 2rem);
-    pointer-events: none;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: var(--z-index-notification);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 24rem;
+  width: calc(100% - 2rem);
+  pointer-events: none;
 }

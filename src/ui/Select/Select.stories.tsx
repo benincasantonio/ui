@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import * as React from "react";
+import { expect, userEvent, waitFor, within } from "storybook/test";
 import {
   Select,
   SelectContent,
@@ -9,8 +11,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./Select";
-import { expect, userEvent, waitFor, within } from "storybook/test";
-import * as React from "react";
 
 /**
  * # Select Component
@@ -140,7 +140,7 @@ export const Default: Story = {
         () => {
           expect(trigger).toHaveTextContent("Banana");
         },
-        { timeout: 2000 }
+        { timeout: 2000 },
       );
     });
   },
@@ -182,7 +182,8 @@ export const WithGroups: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Select with multiple groups, labels, and separators for better organization.",
+        story:
+          "Select with multiple groups, labels, and separators for better organization.",
       },
     },
   },
@@ -204,7 +205,7 @@ export const Controlled: Story = {
     ];
 
     return (
-      <div className="w-80 space-y-4">
+      <div className="space-y-4 w-80">
         <Select value={value} onValueChange={setValue}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a language" />
@@ -217,15 +218,20 @@ export const Controlled: Story = {
             ))}
           </SelectContent>
         </Select>
-        <div className="rounded-md border p-3">
-          <div className="text-muted-foreground mb-2 text-xs font-medium">Selected Value:</div>
+        <div className="p-3 rounded-md border">
+          <div className="mb-2 text-xs font-medium text-muted-foreground">
+            Selected Value:
+          </div>
           <div className="font-mono text-sm">
-            {value || <span className="text-muted-foreground italic">(none)</span>}
+            {value || (
+              <span className="italic text-muted-foreground">(none)</span>
+            )}
           </div>
         </div>
         <button
+          type="button"
           onClick={() => setValue("")}
-          className="bg-secondary hover:bg-secondary/80 w-full rounded-md px-3 py-2 text-sm"
+          className="py-2 px-3 w-full text-sm rounded-md bg-secondary hover:bg-secondary/80"
         >
           Clear Selection
         </button>
@@ -407,7 +413,7 @@ export const FormIntegration: Story = {
     };
 
     return (
-      <form onSubmit={handleSubmit} className="w-96 space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 w-96">
         <div className="space-y-2">
           <label htmlFor="name" className="text-sm font-medium">
             Name *
@@ -417,17 +423,21 @@ export const FormIntegration: Story = {
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="border-input w-full rounded-md border px-3 py-2 text-sm"
+            className="py-2 px-3 w-full text-sm rounded-md border border-input"
             placeholder="John Doe"
           />
           {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Country *</label>
+          <label htmlFor="form-country" className="text-sm font-medium">
+            Country *
+          </label>
           <Select
             value={formData.country}
-            onValueChange={(value) => setFormData({ ...formData, country: value })}
+            onValueChange={(value) =>
+              setFormData({ ...formData, country: value })
+            }
           >
             <SelectTrigger className="w-full" aria-invalid={!!errors.country}>
               <SelectValue placeholder="Select your country" />
@@ -440,11 +450,15 @@ export const FormIntegration: Story = {
               ))}
             </SelectContent>
           </Select>
-          {errors.country && <p className="text-sm text-red-500">{errors.country}</p>}
+          {errors.country && (
+            <p className="text-sm text-red-500">{errors.country}</p>
+          )}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Role *</label>
+          <label htmlFor="form-role" className="text-sm font-medium">
+            Role *
+          </label>
           <Select
             value={formData.role}
             onValueChange={(value) => setFormData({ ...formData, role: value })}
@@ -465,13 +479,13 @@ export const FormIntegration: Story = {
 
         <button
           type="submit"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2 text-sm font-medium"
+          className="py-2 px-4 w-full text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
 
         {submitted && (
-          <div className="rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-800">
+          <div className="p-3 text-sm text-green-800 bg-green-50 rounded-md border border-green-200">
             ✓ Form submitted successfully!
           </div>
         )}
@@ -502,7 +516,9 @@ export const FormIntegration: Story = {
       await userEvent.click(countryTriggers[0]);
 
       // Wait for select content to appear in portal and click option
-      const ukOption = await body.findByRole("option", { name: "United Kingdom" });
+      const ukOption = await body.findByRole("option", {
+        name: "United Kingdom",
+      });
       await userEvent.click(ukOption);
 
       // Wait a bit for state to update
@@ -510,7 +526,7 @@ export const FormIntegration: Story = {
         () => {
           expect(countryTriggers[0]).toHaveTextContent("United Kingdom");
         },
-        { timeout: 2000 }
+        { timeout: 2000 },
       );
 
       // Select role
@@ -525,7 +541,7 @@ export const FormIntegration: Story = {
         () => {
           expect(countryTriggers[1]).toHaveTextContent("Developer");
         },
-        { timeout: 2000 }
+        { timeout: 2000 },
       );
 
       // Submit form
@@ -534,11 +550,9 @@ export const FormIntegration: Story = {
 
       // Wait for success message
       const successMessage = await canvas.findByText(
-        (_content, element) => {
-          return element?.textContent?.includes("Form submitted successfully") ?? false;
-        },
+        "Form submitted successfully!",
         {},
-        { timeout: 3000 }
+        { timeout: 3000 },
       );
       expect(successMessage).toBeInTheDocument();
     });
@@ -546,7 +560,8 @@ export const FormIntegration: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Complete form example with multiple selects, validation, and error handling.",
+        story:
+          "Complete form example with multiple selects, validation, and error handling.",
       },
     },
   },
@@ -563,9 +578,15 @@ export const CustomWidth: Story = {
           <SelectValue placeholder="Wide select (300px)" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="option1">Long option text that might wrap</SelectItem>
-          <SelectItem value="option2">Another long option for testing</SelectItem>
-          <SelectItem value="option3">Yet another long option text here</SelectItem>
+          <SelectItem value="option1">
+            Long option text that might wrap
+          </SelectItem>
+          <SelectItem value="option2">
+            Another long option for testing
+          </SelectItem>
+          <SelectItem value="option3">
+            Yet another long option text here
+          </SelectItem>
         </SelectContent>
       </Select>
 
@@ -655,7 +676,10 @@ export const ScrollableContent: Story = {
         </SelectTrigger>
         <SelectContent>
           {countries.map((country) => (
-            <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, "-")}>
+            <SelectItem
+              key={country}
+              value={country.toLowerCase().replace(/\s+/g, "-")}
+            >
               {country}
             </SelectItem>
           ))}
@@ -666,7 +690,8 @@ export const ScrollableContent: Story = {
   parameters: {
     docs: {
       description: {
-        story: "Select with many options showing automatic scrolling with scroll indicators.",
+        story:
+          "Select with many options showing automatic scrolling with scroll indicators.",
       },
     },
   },

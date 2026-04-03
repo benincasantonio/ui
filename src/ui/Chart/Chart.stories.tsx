@@ -1,23 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ChartContainer, ChartTooltipContent, ChartLegendContent } from "./Chart";
+import { DollarSign, TrendingUp, Users } from "lucide-react";
 import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  AreaChart,
   Area,
-  PieChart,
-  Pie,
+  AreaChart,
+  Bar,
+  BarChart,
+  CartesianGrid,
   Cell,
+  Legend,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
 } from "recharts";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../Card/Card";
-import { DollarSign, Users, TrendingUp } from "lucide-react";
+import { ChartContainer, ChartLegendContent, ChartTooltipContent } from "./Chart";
 
 const meta = {
   title: "Components/Chart",
@@ -72,7 +72,7 @@ export const Default: Story = {
   render: () => (
     <div className="w-full max-w-3xl">
       <ChartContainer
-        className="h-80 w-full"
+        className="w-full h-80"
         config={{
           sales: { label: "Sales", color: "#3b82f6" },
           revenue: { label: "Revenue", color: "#ef4444" },
@@ -118,7 +118,7 @@ export const BarChartExample: Story = {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          className="h-80 w-full"
+          className="w-full h-80"
           config={{
             sales: { label: "Sales", color: "#10b981" },
           }}
@@ -151,7 +151,7 @@ export const AreaChartExample: Story = {
   render: () => (
     <div className="w-full max-w-3xl">
       <ChartContainer
-        className="h-80 w-full"
+        className="w-full h-80"
         config={{
           sales: { label: "Sales", color: "#8b5cf6" },
           revenue: { label: "Revenue", color: "#ec4899" },
@@ -212,7 +212,7 @@ export const PieChartExample: Story = {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          className="h-80 w-full"
+          className="w-full h-80"
           config={{
             desktop: { label: "Desktop", color: "#3b82f6" },
             mobile: { label: "Mobile", color: "#ef4444" },
@@ -231,9 +231,9 @@ export const PieChartExample: Story = {
               fill="#8884d8"
               dataKey="value"
             >
-              {categoryData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
+              {categoryData.map((entry) => {
+                return <Cell key={entry.color} fill={entry.color} />;
+              })}
             </Pie>
             <Tooltip content={<ChartTooltipContent />} />
             <Legend content={<ChartLegendContent />} />
@@ -256,11 +256,11 @@ export const PieChartExample: Story = {
  */
 export const WithThemeColors: Story = {
   render: () => (
-    <div className="w-full max-w-3xl space-y-8">
+    <div className="space-y-8 w-full max-w-3xl">
       <div>
         <h3 className="mb-4 text-lg font-semibold">Light Mode</h3>
         <ChartContainer
-          className="h-64 w-full"
+          className="w-full h-64"
           config={{
             sales: {
               label: "Sales",
@@ -286,7 +286,7 @@ export const WithThemeColors: Story = {
       <div className="dark">
         <h3 className="mb-4 text-lg font-semibold text-white">Dark Mode</h3>
         <ChartContainer
-          className="h-64 w-full"
+          className="w-full h-64"
           config={{
             sales: {
               label: "Sales",
@@ -326,11 +326,11 @@ export const WithThemeColors: Story = {
  */
 export const TooltipIndicators: Story = {
   render: () => (
-    <div className="w-full max-w-3xl space-y-8">
+    <div className="space-y-8 w-full max-w-3xl">
       <div>
         <h3 className="mb-2 text-sm font-medium">Dot Indicator</h3>
         <ChartContainer
-          className="h-48 w-full"
+          className="w-full h-48"
           config={{
             sales: { label: "Sales", color: "#3b82f6" },
           }}
@@ -349,7 +349,7 @@ export const TooltipIndicators: Story = {
       <div>
         <h3 className="mb-2 text-sm font-medium">Line Indicator</h3>
         <ChartContainer
-          className="h-48 w-full"
+          className="w-full h-48"
           config={{
             sales: { label: "Sales", color: "#ef4444" },
           }}
@@ -368,7 +368,7 @@ export const TooltipIndicators: Story = {
       <div>
         <h3 className="mb-2 text-sm font-medium">Dashed Indicator</h3>
         <ChartContainer
-          className="h-48 w-full"
+          className="w-full h-48"
           config={{
             sales: { label: "Sales", color: "#10b981" },
           }}
@@ -407,7 +407,7 @@ export const WithCustomIcons: Story = {
       </CardHeader>
       <CardContent>
         <ChartContainer
-          className="h-80 w-full"
+          className="w-full h-80"
           config={{
             sales: { label: "Sales", color: "#3b82f6", icon: DollarSign },
             customers: { label: "Customers", color: "#10b981", icon: Users },
@@ -447,7 +447,7 @@ export const WithCustomIcons: Story = {
  */
 export const DashboardLayout: Story = {
   render: () => (
-    <div className="grid w-full max-w-6xl grid-cols-1 gap-6 lg:grid-cols-2">
+    <div className="grid grid-cols-1 gap-6 w-full max-w-6xl lg:grid-cols-2">
       <Card>
         <CardHeader>
           <CardTitle>Revenue Trend</CardTitle>
@@ -455,7 +455,7 @@ export const DashboardLayout: Story = {
         </CardHeader>
         <CardContent>
           <ChartContainer
-            className="h-64 w-full"
+            className="w-full h-64"
             config={{
               revenue: { label: "Revenue", color: "#3b82f6" },
             }}
@@ -488,7 +488,7 @@ export const DashboardLayout: Story = {
         </CardHeader>
         <CardContent>
           <ChartContainer
-            className="h-64 w-full"
+            className="w-full h-64"
             config={{
               customers: { label: "Customers", color: "#10b981" },
             }}
@@ -510,7 +510,7 @@ export const DashboardLayout: Story = {
         </CardHeader>
         <CardContent>
           <ChartContainer
-            className="h-80 w-full"
+            className="w-full h-80"
             config={{
               sales: { label: "Sales", color: "#3b82f6" },
               revenue: { label: "Revenue", color: "#ef4444" },
@@ -558,7 +558,7 @@ export const DashboardLayout: Story = {
  */
 export const Responsive: Story = {
   render: () => (
-    <div className="w-full max-w-4xl space-y-4">
+    <div className="space-y-4 w-full max-w-4xl">
       <Card>
         <CardHeader>
           <CardTitle>Responsive Chart</CardTitle>
@@ -566,7 +566,7 @@ export const Responsive: Story = {
         </CardHeader>
         <CardContent>
           <ChartContainer
-            className="h-96 w-full"
+            className="w-full h-96"
             config={{
               sales: { label: "Sales", color: "#3b82f6" },
               revenue: { label: "Revenue", color: "#ef4444" },
@@ -589,7 +589,7 @@ export const Responsive: Story = {
           </ChartContainer>
         </CardContent>
       </Card>
-      <p className="text-muted-foreground text-sm">
+      <p className="text-sm text-muted-foreground">
         Try resizing your browser window to see the chart adapt to different widths.
       </p>
     </div>

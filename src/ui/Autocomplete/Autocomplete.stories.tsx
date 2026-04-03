@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Autocomplete } from "./Autocomplete";
 import * as React from "react";
+import { Autocomplete } from "./Autocomplete";
 
 /**
  * # Autocomplete Component
@@ -164,7 +164,7 @@ export const Controlled: Story = {
     ];
 
     return (
-      <div className="w-80 space-y-4">
+      <div className="space-y-4 w-80">
         <Autocomplete
           value={value}
           placeholder="Select a framework..."
@@ -173,13 +173,14 @@ export const Controlled: Story = {
           items={frameworks}
           onValueChange={setValue}
         />
-        <div className="rounded-md border p-3 text-center text-sm">
-          <div className="text-muted-foreground mb-1 font-medium">Selected Value:</div>
+        <div className="p-3 text-sm text-center rounded-md border">
+          <div className="mb-1 font-medium text-muted-foreground">Selected Value:</div>
           <div className="font-mono">{value || "(none)"}</div>
         </div>
         <button
+          type="button"
           onClick={() => setValue("")}
-          className="bg-secondary hover:bg-secondary/80 w-full rounded-md px-3 py-2 text-sm"
+          className="py-2 px-3 w-full text-sm rounded-md bg-secondary hover:bg-secondary/80"
         >
           Clear Selection
         </button>
@@ -206,49 +207,53 @@ export const ServerSideFiltering: Story = {
     const [items, setItems] = React.useState<{ value: string; label: string }[]>([]);
     const [isLoading, setIsLoading] = React.useState(false);
 
-    // Simulated API data - in real app, this would come from your backend
-    const allCountries = [
-      { value: "us", label: "United States" },
-      { value: "uk", label: "United Kingdom" },
-      { value: "ca", label: "Canada" },
-      { value: "au", label: "Australia" },
-      { value: "de", label: "Germany" },
-      { value: "fr", label: "France" },
-      { value: "es", label: "Spain" },
-      { value: "it", label: "Italy" },
-      { value: "jp", label: "Japan" },
-      { value: "cn", label: "China" },
-      { value: "br", label: "Brazil" },
-      { value: "in", label: "India" },
-      { value: "mx", label: "Mexico" },
-      { value: "ru", label: "Russia" },
-      { value: "za", label: "South Africa" },
-    ];
+    const allCountries = React.useMemo(
+      () => [
+        { value: "us", label: "United States" },
+        { value: "uk", label: "United Kingdom" },
+        { value: "ca", label: "Canada" },
+        { value: "au", label: "Australia" },
+        { value: "de", label: "Germany" },
+        { value: "fr", label: "France" },
+        { value: "es", label: "Spain" },
+        { value: "it", label: "Italy" },
+        { value: "jp", label: "Japan" },
+        { value: "cn", label: "China" },
+        { value: "br", label: "Brazil" },
+        { value: "in", label: "India" },
+        { value: "mx", label: "Mexico" },
+        { value: "ru", label: "Russia" },
+        { value: "za", label: "South Africa" },
+      ],
+      []
+    );
 
-    const fetchCountries = async (searchTerm: string) => {
-      setIsLoading(true);
+    const fetchCountries = React.useCallback(
+      async (searchTerm: string) => {
+        setIsLoading(true);
 
-      // Simulate network delay
-      await new Promise((resolve) => setTimeout(resolve, 500));
+        // Simulate network delay
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
-      // Filter results based on search term
-      const filtered = searchTerm
-        ? allCountries.filter((country) =>
-            country.label.toLowerCase().includes(searchTerm.toLowerCase())
-          )
-        : allCountries;
+        // Filter results based on search term
+        const filtered = searchTerm
+          ? allCountries.filter((country) =>
+              country.label.toLowerCase().includes(searchTerm.toLowerCase())
+            )
+          : allCountries;
 
-      setItems(filtered);
-      setIsLoading(false);
-    };
+        setItems(filtered);
+        setIsLoading(false);
+      },
+      [allCountries]
+    );
 
     React.useEffect(() => {
-      // Initial data load
       fetchCountries("");
-    }, []);
+    }, [fetchCountries]);
 
     return (
-      <div className="w-80 space-y-4">
+      <div className="space-y-4 w-80">
         <Autocomplete
           value={value}
           placeholder="Select a country..."
@@ -259,17 +264,17 @@ export const ServerSideFiltering: Story = {
           onFilterChange={fetchCountries}
           onValueChange={setValue}
         />
-        <div className="rounded-md border p-3 text-center text-sm">
-          <div className="text-muted-foreground mb-1 font-medium">API Status:</div>
-          <div className="flex items-center justify-center gap-2">
+        <div className="p-3 text-sm text-center rounded-md border">
+          <div className="mb-1 font-medium text-muted-foreground">API Status:</div>
+          <div className="flex gap-2 justify-center items-center">
             {isLoading ? (
               <>
-                <div className="size-2 animate-pulse rounded-full bg-yellow-500" />
+                <div className="bg-yellow-500 rounded-full animate-pulse size-2" />
                 <span>Loading...</span>
               </>
             ) : (
               <>
-                <div className="size-2 rounded-full bg-green-500" />
+                <div className="bg-green-500 rounded-full size-2" />
                 <span>Ready ({items.length} results)</span>
               </>
             )}
@@ -393,7 +398,7 @@ export const LargeDataset: Story = {
     );
 
     return (
-      <div className="w-80 space-y-4">
+      <div className="space-y-4 w-80">
         <Autocomplete
           value={value}
           placeholder="Select from 1000 items..."
@@ -402,8 +407,8 @@ export const LargeDataset: Story = {
           items={items}
           onValueChange={setValue}
         />
-        <div className="rounded-md border p-3 text-center text-sm">
-          <div className="text-muted-foreground mb-1 text-xs">Total: {items.length} items</div>
+        <div className="p-3 text-sm text-center rounded-md border">
+          <div className="mb-1 text-xs text-muted-foreground">Total: {items.length} items</div>
           <div className="font-mono text-xs">{value || "(none selected)"}</div>
         </div>
       </div>
@@ -463,21 +468,26 @@ export const FormIntegration: Story = {
     };
 
     return (
-      <form onSubmit={handleSubmit} className="w-96 space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4 w-96">
         <div className="space-y-2">
-          <label className="text-sm font-medium">Name</label>
+          <label htmlFor="form-name" className="text-sm font-medium">
+            Name
+          </label>
           <input
+            id="form-name"
             type="text"
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full rounded-md border px-3 py-2 text-sm"
+            className="py-2 px-3 w-full text-sm rounded-md border"
             placeholder="John Doe"
           />
           {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Role *</label>
+          <label htmlFor="form-role" className="text-sm font-medium">
+            Role *
+          </label>
           <Autocomplete
             value={formData.role}
             placeholder="Select your role..."
@@ -489,7 +499,9 @@ export const FormIntegration: Story = {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium">Department *</label>
+          <label htmlFor="form-department" className="text-sm font-medium">
+            Department *
+          </label>
           <Autocomplete
             value={formData.department}
             placeholder="Select your department..."
@@ -502,12 +514,12 @@ export const FormIntegration: Story = {
 
         <button
           type="submit"
-          className="bg-primary text-primary-foreground hover:bg-primary/90 w-full rounded-md px-4 py-2 text-sm font-medium"
+          className="py-2 px-4 w-full text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90"
         >
           Submit
         </button>
 
-        <div className="bg-muted rounded-md p-3 text-xs">
+        <div className="p-3 text-xs rounded-md bg-muted">
           <div className="font-medium">Form State:</div>
           <pre className="mt-2">{JSON.stringify(formData, null, 2)}</pre>
         </div>

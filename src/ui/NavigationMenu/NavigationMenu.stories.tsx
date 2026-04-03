@@ -1,24 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import {
+  BookOpen,
+  Home,
+  Layers,
+  Leaf,
+  Package,
+  Shirt,
+  Smartphone,
+  Star,
+  Users,
+} from "lucide-react";
 import { expect, userEvent, waitFor } from "storybook/test";
 import {
   NavigationMenu,
-  NavigationMenuList,
-  NavigationMenuItem,
-  NavigationMenuTrigger,
   NavigationMenuContent,
+  NavigationMenuItem,
   NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
 } from "./NavigationMenu";
-import {
-  BookOpen,
-  Layers,
-  Users,
-  Package,
-  Home,
-  Star,
-  Smartphone,
-  Shirt,
-  Leaf,
-} from "lucide-react";
 
 const meta = {
   title: "Components/NavigationMenu",
@@ -52,7 +52,7 @@ export const Default: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Getting Started</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm text-muted-foreground">
                 Learn how to get started with our platform
               </p>
@@ -63,10 +63,8 @@ export const Default: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
-              <p className="text-sm text-muted-foreground">
-                Browse our component library
-              </p>
+            <div className="p-4 w-[400px]">
+              <p className="text-sm text-muted-foreground">Browse our component library</p>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -74,10 +72,8 @@ export const Default: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Pricing</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
-              <p className="text-sm text-muted-foreground">
-                View our pricing plans
-              </p>
+            <div className="p-4 w-[400px]">
+              <p className="text-sm text-muted-foreground">View our pricing plans</p>
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
@@ -92,17 +88,13 @@ export const Default: Story = {
     });
 
     await step("Click trigger to open content", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="navigation-menu-trigger"]');
       expect(trigger).toBeInTheDocument();
 
       await userEvent.click(trigger!);
 
       await waitFor(() => {
-        expect(canvasElement.textContent).toContain(
-          "Learn how to get started with our platform",
-        );
+        expect(canvasElement.textContent).toContain("Learn how to get started with our platform");
       });
     });
   },
@@ -118,23 +110,19 @@ export const WithIcons: Story = {
             Documentation
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4 space-y-2">
+            <div className="p-4 space-y-2 w-[400px]">
               <NavigationMenuLink href="#" className="flex items-center">
                 <BookOpen className="mr-2 size-4" />
                 <div>
                   <div className="font-medium">Getting Started</div>
-                  <div className="text-xs text-muted-foreground">
-                    Quick start guide
-                  </div>
+                  <div className="text-xs text-muted-foreground">Quick start guide</div>
                 </div>
               </NavigationMenuLink>
               <NavigationMenuLink href="#" className="flex items-center">
                 <Layers className="mr-2 size-4" />
                 <div>
                   <div className="font-medium">API Reference</div>
-                  <div className="text-xs text-muted-foreground">
-                    Complete API docs
-                  </div>
+                  <div className="text-xs text-muted-foreground">Complete API docs</div>
                 </div>
               </NavigationMenuLink>
             </div>
@@ -147,23 +135,19 @@ export const WithIcons: Story = {
             Community
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4 space-y-2">
+            <div className="p-4 space-y-2 w-[400px]">
               <NavigationMenuLink href="#" className="flex items-center">
                 <Users className="mr-2 size-4" />
                 <div>
                   <div className="font-medium">Discord</div>
-                  <div className="text-xs text-muted-foreground">
-                    Join our community
-                  </div>
+                  <div className="text-xs text-muted-foreground">Join our community</div>
                 </div>
               </NavigationMenuLink>
               <NavigationMenuLink href="#" className="flex items-center">
                 <Star className="mr-2 size-4" />
                 <div>
                   <div className="font-medium">GitHub</div>
-                  <div className="text-xs text-muted-foreground">
-                    Star us on GitHub
-                  </div>
+                  <div className="text-xs text-muted-foreground">Star us on GitHub</div>
                 </div>
               </NavigationMenuLink>
             </div>
@@ -174,22 +158,16 @@ export const WithIcons: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Verify icons render in triggers", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
       expect(triggers.length).toBeGreaterThan(0);
     });
 
     await step("Open menu and verify link icons", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="navigation-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
-        const links = canvasElement.querySelectorAll(
-          '[data-slot="navigation-menu-link"]',
-        );
+        const links = canvasElement.querySelectorAll('[data-slot="navigation-menu-link"]');
         expect(links.length).toBeGreaterThan(0);
       });
     });
@@ -203,7 +181,7 @@ export const DocumentationMenu: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Getting Started</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[500px] p-4">
+            <div className="p-4 w-[500px]">
               <div className="space-y-2">
                 <NavigationMenuLink href="#">
                   <div className="font-medium">Installation</div>
@@ -231,7 +209,7 @@ export const DocumentationMenu: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Components</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[600px] p-4">
+            <div className="p-4 w-[600px]">
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <h4 className="text-sm font-semibold">Form</h4>
@@ -255,25 +233,19 @@ export const DocumentationMenu: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Resources</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <div className="space-y-2">
                 <NavigationMenuLink href="#">
                   <div className="font-medium">API Docs</div>
-                  <div className="text-xs text-muted-foreground">
-                    Complete API reference
-                  </div>
+                  <div className="text-xs text-muted-foreground">Complete API reference</div>
                 </NavigationMenuLink>
                 <NavigationMenuLink href="#">
                   <div className="font-medium">Examples</div>
-                  <div className="text-xs text-muted-foreground">
-                    Code examples and patterns
-                  </div>
+                  <div className="text-xs text-muted-foreground">Code examples and patterns</div>
                 </NavigationMenuLink>
                 <NavigationMenuLink href="#">
                   <div className="font-medium">GitHub</div>
-                  <div className="text-xs text-muted-foreground">
-                    View source code
-                  </div>
+                  <div className="text-xs text-muted-foreground">View source code</div>
                 </NavigationMenuLink>
               </div>
             </div>
@@ -284,23 +256,17 @@ export const DocumentationMenu: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Verify all menu items render", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
       expect(triggers).toHaveLength(3);
     });
 
     await step("Open Components menu and verify grid layout", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
       const componentsMenu = triggers[1];
       await userEvent.click(componentsMenu as Element);
 
       await waitFor(() => {
-        const content = canvasElement.querySelector(
-          '[data-slot="navigation-menu-content"]',
-        );
+        const content = canvasElement.querySelector('[data-slot="navigation-menu-content"]');
         expect(content).toBeVisible();
       });
     });
@@ -314,7 +280,7 @@ export const ViewportMode: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Products</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm">Browse our products</p>
             </div>
           </NavigationMenuContent>
@@ -323,7 +289,7 @@ export const ViewportMode: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm">Explore our solutions</p>
             </div>
           </NavigationMenuContent>
@@ -332,7 +298,7 @@ export const ViewportMode: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Company</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm">Learn about us</p>
             </div>
           </NavigationMenuContent>
@@ -347,9 +313,7 @@ export const ViewportMode: Story = {
     });
 
     await step("Switch between items in shared viewport", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
 
       await userEvent.click(triggers[0] as Element);
       await waitFor(() => {
@@ -371,7 +335,7 @@ export const PopoverMode: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Features</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm">View our features</p>
             </div>
           </NavigationMenuContent>
@@ -380,7 +344,7 @@ export const PopoverMode: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Pricing</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm">See pricing plans</p>
             </div>
           </NavigationMenuContent>
@@ -393,16 +357,12 @@ export const PopoverMode: Story = {
       const menu = canvasElement.querySelector('[data-slot="navigation-menu"]');
       expect(menu).toHaveAttribute("data-viewport", "false");
 
-      const viewport = canvasElement.querySelector(
-        '[data-slot="navigation-menu-viewport"]',
-      );
+      const viewport = canvasElement.querySelector('[data-slot="navigation-menu-viewport"]');
       expect(viewport).not.toBeInTheDocument();
     });
 
     await step("Open menu item in popover mode", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="navigation-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
@@ -419,28 +379,22 @@ export const WithComplexContent: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Shop by Category</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[600px] p-6">
+            <div className="p-6 w-[600px]">
               <div className="grid grid-cols-3 gap-4">
                 <NavigationMenuLink href="#" className="text-center">
                   <Package className="mx-auto mb-2 size-8" />
                   <div className="font-medium">Electronics</div>
-                  <div className="text-xs text-muted-foreground">
-                    Latest gadgets
-                  </div>
+                  <div className="text-xs text-muted-foreground">Latest gadgets</div>
                 </NavigationMenuLink>
                 <NavigationMenuLink href="#" className="text-center">
                   <Shirt className="mx-auto mb-2 size-8" />
                   <div className="font-medium">Clothing</div>
-                  <div className="text-xs text-muted-foreground">
-                    Fashion trends
-                  </div>
+                  <div className="text-xs text-muted-foreground">Fashion trends</div>
                 </NavigationMenuLink>
                 <NavigationMenuLink href="#" className="text-center">
                   <Home className="mx-auto mb-2 size-8" />
                   <div className="font-medium">Home</div>
-                  <div className="text-xs text-muted-foreground">
-                    Decor & furniture
-                  </div>
+                  <div className="text-xs text-muted-foreground">Decor & furniture</div>
                 </NavigationMenuLink>
               </div>
             </div>
@@ -451,15 +405,11 @@ export const WithComplexContent: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify grid layout", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="navigation-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
-        const links = canvasElement.querySelectorAll(
-          '[data-slot="navigation-menu-link"]',
-        );
+        const links = canvasElement.querySelectorAll('[data-slot="navigation-menu-link"]');
         expect(links).toHaveLength(3);
       });
     });
@@ -473,7 +423,7 @@ export const ManyItems: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Item 1</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[300px] p-4">
+            <div className="p-4 w-[300px]">
               <p className="text-sm">Content for item 1</p>
             </div>
           </NavigationMenuContent>
@@ -482,7 +432,7 @@ export const ManyItems: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Item 2</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[300px] p-4">
+            <div className="p-4 w-[300px]">
               <p className="text-sm">Content for item 2</p>
             </div>
           </NavigationMenuContent>
@@ -491,7 +441,7 @@ export const ManyItems: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Item 3</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[300px] p-4">
+            <div className="p-4 w-[300px]">
               <p className="text-sm">Content for item 3</p>
             </div>
           </NavigationMenuContent>
@@ -500,7 +450,7 @@ export const ManyItems: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Item 4</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[300px] p-4">
+            <div className="p-4 w-[300px]">
               <p className="text-sm">Content for item 4</p>
             </div>
           </NavigationMenuContent>
@@ -509,7 +459,7 @@ export const ManyItems: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Item 5</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[300px] p-4">
+            <div className="p-4 w-[300px]">
               <p className="text-sm">Content for item 5</p>
             </div>
           </NavigationMenuContent>
@@ -519,22 +469,16 @@ export const ManyItems: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Verify all 5 items render", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
       expect(triggers).toHaveLength(5);
     });
 
     await step("Navigate through multiple items", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
 
       await userEvent.click(triggers[0] as Element);
       await waitFor(() => {
-        const content = canvasElement.querySelector(
-          '[data-slot="navigation-menu-content"]',
-        );
+        const content = canvasElement.querySelector('[data-slot="navigation-menu-content"]');
         expect(content).toBeVisible();
       });
 
@@ -553,7 +497,7 @@ export const WithDescriptions: Story = {
         <NavigationMenuItem>
           <NavigationMenuTrigger>Learn</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[500px] p-4 space-y-2">
+            <div className="p-4 space-y-2 w-[500px]">
               <NavigationMenuLink href="#">
                 <div className="font-medium">Introduction</div>
                 <div className="text-xs text-muted-foreground">
@@ -586,19 +530,13 @@ export const WithDescriptions: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Open menu and verify descriptions", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="navigation-menu-trigger"]');
       await userEvent.click(trigger!);
 
       await waitFor(() => {
-        const links = canvasElement.querySelectorAll(
-          '[data-slot="navigation-menu-link"]',
-        );
+        const links = canvasElement.querySelectorAll('[data-slot="navigation-menu-link"]');
         expect(links).toHaveLength(4);
-        expect(canvasElement.textContent).toContain(
-          "Learn the basics and get started quickly",
-        );
+        expect(canvasElement.textContent).toContain("Learn the basics and get started quickly");
       });
     });
   },
@@ -614,7 +552,7 @@ export const MultipleCategories: Story = {
             Clothing
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4 space-y-2">
+            <div className="p-4 space-y-2 w-[400px]">
               <NavigationMenuLink href="#" className="flex items-center">
                 <Users className="mr-2" />
                 Men's Clothing
@@ -637,7 +575,7 @@ export const MultipleCategories: Story = {
             Electronics
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4 space-y-2">
+            <div className="p-4 space-y-2 w-[400px]">
               <NavigationMenuLink href="#" className="flex items-center">
                 <Smartphone className="mr-2" />
                 Smartphones
@@ -660,7 +598,7 @@ export const MultipleCategories: Story = {
             Home & Garden
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4 space-y-2">
+            <div className="p-4 space-y-2 w-[400px]">
               <NavigationMenuLink href="#" className="flex items-center">
                 <Home className="mr-2" />
                 Furniture
@@ -681,16 +619,12 @@ export const MultipleCategories: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Verify all categories render", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
       expect(triggers).toHaveLength(3);
     });
 
     await step("Navigate between categories", async () => {
-      const triggers = canvasElement.querySelectorAll(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const triggers = canvasElement.querySelectorAll('[data-slot="navigation-menu-trigger"]');
 
       await userEvent.click(triggers[0]);
       await waitFor(() => {
@@ -710,14 +644,11 @@ export const ChevronRotation: Story = {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>
-            Click to see chevron rotate
-          </NavigationMenuTrigger>
+          <NavigationMenuTrigger>Click to see chevron rotate</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="w-[400px] p-4">
+            <div className="p-4 w-[400px]">
               <p className="text-sm">
-                The chevron icon in the trigger rotates 180 degrees when this
-                content is open
+                The chevron icon in the trigger rotates 180 degrees when this content is open
               </p>
             </div>
           </NavigationMenuContent>
@@ -727,15 +658,13 @@ export const ChevronRotation: Story = {
   ),
   play: async ({ canvasElement, step }) => {
     await step("Verify chevron rotates when opened", async () => {
-      const trigger = canvasElement.querySelector(
-        '[data-slot="navigation-menu-trigger"]',
-      );
+      const trigger = canvasElement.querySelector('[data-slot="navigation-menu-trigger"]');
 
       await userEvent.click(trigger!);
 
       await waitFor(() => {
         expect(canvasElement.textContent).toContain(
-          "The chevron icon in the trigger rotates 180 degrees",
+          "The chevron icon in the trigger rotates 180 degrees"
         );
         const chevron = trigger?.querySelector("svg");
         expect(chevron).toBeInTheDocument();

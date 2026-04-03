@@ -1,14 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import {
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverAnchor,
-} from "./Popover";
+import * as React from "react";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { Label } from "../Label/Label";
-import * as React from "react";
+import { Popover, PopoverAnchor, PopoverContent, PopoverTrigger } from "./Popover";
 
 const meta = {
   title: "Components/Popover",
@@ -36,7 +31,7 @@ export const Default: Story = {
       <PopoverContent>
         <div className="space-y-2">
           <h4 className="font-medium leading-none">Popover Title</h4>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-sm text-muted-foreground">
             This is a simple popover with some content.
           </p>
         </div>
@@ -55,42 +50,24 @@ export const WithForm: Story = {
         <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="font-medium leading-none">Dimensions</h4>
-            <p className="text-muted-foreground text-sm">
-              Set the dimensions for the layer.
-            </p>
+            <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
           </div>
           <div className="grid gap-2">
-            <div className="grid grid-cols-3 items-center gap-4">
+            <div className="grid grid-cols-3 gap-4 items-center">
               <Label htmlFor="width">Width</Label>
-              <Input
-                id="width"
-                defaultValue="100%"
-                className="col-span-2 h-8"
-              />
+              <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
             </div>
-            <div className="grid grid-cols-3 items-center gap-4">
+            <div className="grid grid-cols-3 gap-4 items-center">
               <Label htmlFor="maxWidth">Max. width</Label>
-              <Input
-                id="maxWidth"
-                defaultValue="300px"
-                className="col-span-2 h-8"
-              />
+              <Input id="maxWidth" defaultValue="300px" className="col-span-2 h-8" />
             </div>
-            <div className="grid grid-cols-3 items-center gap-4">
+            <div className="grid grid-cols-3 gap-4 items-center">
               <Label htmlFor="height">Height</Label>
-              <Input
-                id="height"
-                defaultValue="25px"
-                className="col-span-2 h-8"
-              />
+              <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
             </div>
-            <div className="grid grid-cols-3 items-center gap-4">
+            <div className="grid grid-cols-3 gap-4 items-center">
               <Label htmlFor="maxHeight">Max. height</Label>
-              <Input
-                id="maxHeight"
-                defaultValue="none"
-                className="col-span-2 h-8"
-              />
+              <Input id="maxHeight" defaultValue="none" className="col-span-2 h-8" />
             </div>
           </div>
         </div>
@@ -183,9 +160,9 @@ export const CustomWidth: Story = {
       <PopoverContent className="w-96">
         <div className="space-y-2">
           <h4 className="font-medium leading-none">Wide Popover</h4>
-          <p className="text-muted-foreground text-sm">
-            This popover has a custom width of 24rem (96 in Tailwind). The
-            default width is 18rem (72 in Tailwind).
+          <p className="text-sm text-muted-foreground">
+            This popover has a custom width of 24rem (96 in Tailwind). The default width is 18rem
+            (72 in Tailwind).
           </p>
         </div>
       </PopoverContent>
@@ -206,23 +183,16 @@ export const Controlled: Story = {
           <PopoverContent>
             <div className="space-y-2">
               <h4 className="font-medium leading-none">Controlled Popover</h4>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-sm text-muted-foreground">
                 This popover's open state is controlled by React state.
               </p>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => setOpen(false)}
-                className="w-full"
-              >
+              <Button variant="outline" size="sm" onClick={() => setOpen(false)} className="w-full">
                 Close from inside
               </Button>
             </div>
           </PopoverContent>
         </Popover>
-        <div className="text-center text-sm">
-          Popover is {open ? "open" : "closed"}
-        </div>
+        <div className="text-sm text-center">Popover is {open ? "open" : "closed"}</div>
       </div>
     );
   },

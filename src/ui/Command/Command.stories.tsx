@@ -1,24 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { Calculator, Calendar, CreditCard, Settings, Smile, User } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
   Command,
   CommandDialog,
-  CommandInput,
-  CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
-  CommandShortcut,
+  CommandList,
   CommandSeparator,
+  CommandShortcut,
 } from "./Command";
-import {
-  Calculator,
-  Calendar,
-  CreditCard,
-  Settings,
-  Smile,
-  User,
-} from "lucide-react";
-import { useState, useEffect } from "react";
 
 const meta = {
   title: "Components/Command",
@@ -41,32 +34,32 @@ export const Default: Story = {
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Suggestions">
           <CommandItem>
-            <Calendar className="mr-2 h-4 w-4" />
+            <Calendar className="mr-2 w-4 h-4" />
             <span>Calendar</span>
           </CommandItem>
           <CommandItem>
-            <Smile className="mr-2 h-4 w-4" />
+            <Smile className="mr-2 w-4 h-4" />
             <span>Search Emoji</span>
           </CommandItem>
           <CommandItem disabled>
-            <Calculator className="mr-2 h-4 w-4" />
+            <Calculator className="mr-2 w-4 h-4" />
             <span>Calculator</span>
           </CommandItem>
         </CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Settings">
           <CommandItem>
-            <User className="mr-2 h-4 w-4" />
+            <User className="mr-2 w-4 h-4" />
             <span>Profile</span>
             <CommandShortcut>⌘P</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            <CreditCard className="mr-2 h-4 w-4" />
+            <CreditCard className="mr-2 w-4 h-4" />
             <span>Billing</span>
             <CommandShortcut>⌘B</CommandShortcut>
           </CommandItem>
           <CommandItem>
-            <Settings className="mr-2 h-4 w-4" />
+            <Settings className="mr-2 w-4 h-4" />
             <span>Settings</span>
             <CommandShortcut>⌘S</CommandShortcut>
           </CommandItem>
@@ -94,14 +87,14 @@ export const WithDialog: Story = {
 
     return (
       <>
-        <div className="flex flex-col items-center justify-center p-6 text-center">
-            <p className="text-sm text-muted-foreground">
+        <div className="flex flex-col justify-center items-center p-6 text-center">
+          <p className="text-sm text-muted-foreground">
             Press{" "}
-            <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-                <span className="text-xs">⌘</span>K
+            <kbd className="inline-flex gap-1 items-center px-1.5 h-5 font-mono font-medium rounded border opacity-100 pointer-events-none select-none bg-muted text-[10px] text-muted-foreground">
+              <span className="text-xs">⌘</span>K
             </kbd>{" "}
             to open the command menu.
-            </p>
+          </p>
         </div>
         <CommandDialog open={open} onOpenChange={setOpen}>
           <CommandInput placeholder="Type a command or search..." />
@@ -109,32 +102,32 @@ export const WithDialog: Story = {
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Suggestions">
               <CommandItem>
-                <Calendar className="mr-2 h-4 w-4" />
+                <Calendar className="mr-2 w-4 h-4" />
                 <span>Calendar</span>
               </CommandItem>
               <CommandItem>
-                <Smile className="mr-2 h-4 w-4" />
+                <Smile className="mr-2 w-4 h-4" />
                 <span>Search Emoji</span>
               </CommandItem>
               <CommandItem>
-                <Calculator className="mr-2 h-4 w-4" />
+                <Calculator className="mr-2 w-4 h-4" />
                 <span>Calculator</span>
               </CommandItem>
             </CommandGroup>
             <CommandSeparator />
             <CommandGroup heading="Settings">
               <CommandItem>
-                <User className="mr-2 h-4 w-4" />
+                <User className="mr-2 w-4 h-4" />
                 <span>Profile</span>
                 <CommandShortcut>⌘P</CommandShortcut>
               </CommandItem>
               <CommandItem>
-                <CreditCard className="mr-2 h-4 w-4" />
+                <CreditCard className="mr-2 w-4 h-4" />
                 <span>Billing</span>
                 <CommandShortcut>⌘B</CommandShortcut>
               </CommandItem>
               <CommandItem>
-                <Settings className="mr-2 h-4 w-4" />
+                <Settings className="mr-2 w-4 h-4" />
                 <span>Settings</span>
                 <CommandShortcut>⌘S</CommandShortcut>
               </CommandItem>
