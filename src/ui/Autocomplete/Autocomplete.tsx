@@ -12,6 +12,7 @@ import {
 } from "../Command/Command";
 import { Popover, PopoverContent, PopoverTrigger } from "../Popover/Popover";
 import { Spinner } from "../Spinner/Spinner";
+import "./Autocomplete.css";
 
 type AutocompleteProps = {
   value?: string;
@@ -71,7 +72,7 @@ export const Autocomplete = (props: AutocompleteProps) => {
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button variant="outline" className="justify-between w-full" disabled={props.disabled}>
+        <Button variant="outline" className="autocomplete-trigger" disabled={props.disabled}>
           {!props.value && <div className="text-muted-foreground">{props.placeholder}</div>}
           {props.value && <div className="truncate">{selectedLabel || props.value}</div>}
           {props.isLoading && <Spinner className="ml-2 w-4 h-4 shrink-0" />}
