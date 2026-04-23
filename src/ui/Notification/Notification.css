@@ -1,13 +1,40 @@
 /* ── Container ── */
+@scope (.notification-container) {
+  :scope {
+    --notification-container-inset-block-start: 1rem;
+    --notification-container-inset-inline-end: 1rem;
+    --notification-container-z-index: var(--z-index-notification);
+    --notification-container-gap: 0.5rem;
+    --notification-container-max-width: 24rem;
+    --notification-container-width: calc(100% - 2rem);
+  }
+}
+
 .notification-container {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
-  z-index: var(--z-index-notification);
+  top: var(--notification-container-inset-block-start);
+  right: var(--notification-container-inset-inline-end);
+  z-index: var(--notification-container-z-index);
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  max-width: 24rem;
-  width: calc(100% - 2rem);
+  gap: var(--notification-container-gap);
+  max-width: var(--notification-container-max-width);
+  width: var(--notification-container-width);
   pointer-events: none;
+}
+
+@scope (.notification) {
+  :scope {
+    --notification-background-color: var(--background);
+    --notification-border-color: var(--border);
+    --notification-text-color: var(--foreground);
+    --notification-shadow: 0 4px 12px oklch(0 0 0 / 10%);
+  }
+}
+
+.notification {
+  --alert-background-color: var(--notification-background-color);
+  --alert-border-color: var(--notification-border-color);
+  --alert-foreground-color: var(--notification-text-color);
+  --alert-notification-shadow: var(--notification-shadow);
 }

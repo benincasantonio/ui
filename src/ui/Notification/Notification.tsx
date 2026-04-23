@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { NotificationData } from "@/hooks/useNotification";
+import { cn } from "@/lib/utils";
 import { Alert } from "@/ui/Alert/Alert";
 
 const DEFAULT_DURATION = 5000;
@@ -42,7 +43,7 @@ function Notification({
       dismissible
       exiting={exiting || autoDismissing}
       onDismiss={handleDismiss}
-      className={className}
+      className={cn("notification", className)}
     />
   );
 }

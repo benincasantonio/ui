@@ -1,0 +1,30 @@
+:root {
+  --color-border: oklch(0.922 0 0);
+  --color-success: #34d399;
+  --color-info: #60a5fa;
+  --color-warning: #fbbf24;
+  --color-danger: #f87171;
+}
+
+.dark {
+  --color-border: oklch(1 0 0 / 10%);
+}
+
+@supports (color: light-dark(white, black)) {
+  :root {
+    color-scheme: light;
+    --color-border: light-dark(oklch(0.922 0 0), oklch(1 0 0 / 10%));
+    --color-success: light-dark(oklch(0.62 0.19 145), oklch(0.72 0.19 145));
+    --color-info: light-dark(oklch(0.55 0.19 255), oklch(0.65 0.19 255));
+    --color-warning: light-dark(oklch(0.75 0.18 85), oklch(0.82 0.18 85));
+    --color-danger: light-dark(oklch(0.58 0.24 27), oklch(0.7 0.19 22));
+  }
+
+  .light {
+    color-scheme: light;
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+}

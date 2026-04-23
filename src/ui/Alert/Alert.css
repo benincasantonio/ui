@@ -1,29 +1,44 @@
+@scope (.alert) {
+  :scope {
+    --alert-background-color: var(--background);
+    --alert-foreground-color: var(--foreground);
+    --alert-border-color: var(--border);
+    --alert-accent-border-color: var(--border);
+    --alert-border-radius: var(--radius-xs, 4px);
+    --alert-close-color: var(--muted-foreground);
+    --alert-close-hover-color: var(--foreground);
+    --alert-close-hover-background-color: var(--accent);
+    --alert-message-color: var(--muted-foreground);
+    --alert-notification-shadow: 0 4px 12px oklch(0 0 0 / 10%);
+  }
+}
+
 /* ── Alert ── */
 .alert {
-  background-color: var(--background);
-  color: var(--foreground);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-xs, 4px);
-  border-left: 4px solid var(--alert-border-color);
+  background-color: var(--alert-background-color);
+  color: var(--alert-foreground-color);
+  border: 1px solid var(--alert-border-color);
+  border-radius: var(--alert-border-radius);
+  border-left: 4px solid var(--alert-accent-border-color);
   padding: 0.75rem 1rem;
   position: relative;
 }
 
 /* ── Variant border colors ── */
 .alert[data-variant="success"] {
-  --alert-border-color: var(--alert-success);
+  --alert-accent-border-color: var(--alert-success);
 }
 
 .alert[data-variant="info"] {
-  --alert-border-color: var(--alert-info);
+  --alert-accent-border-color: var(--alert-info);
 }
 
 .alert[data-variant="warning"] {
-  --alert-border-color: var(--alert-warning);
+  --alert-accent-border-color: var(--alert-warning);
 }
 
 .alert[data-variant="danger"] {
-  --alert-border-color: var(--alert-danger);
+  --alert-accent-border-color: var(--alert-danger);
 }
 
 /* ── Dismissible close button ── */
@@ -33,7 +48,7 @@
   right: 0.5rem;
   background: none;
   border: none;
-  color: var(--muted-foreground);
+  color: var(--alert-close-color);
   cursor: pointer;
   padding: 0.125rem;
   border-radius: var(--radius-xs, 4px);
@@ -46,8 +61,8 @@
 }
 
 .alert-close:hover {
-  color: var(--foreground);
-  background-color: var(--accent);
+  color: var(--alert-close-hover-color);
+  background-color: var(--alert-close-hover-background-color);
 }
 
 /* ── Title & message ── */
@@ -59,7 +74,7 @@
 
 .alert-message {
   font-size: 0.8125rem;
-  color: var(--muted-foreground);
+  color: var(--alert-message-color);
 }
 
 /* ── Space for close button when dismissible ── */
@@ -119,7 +134,7 @@
 
 .alert[data-context="notification"] {
   pointer-events: auto;
-  box-shadow: 0 4px 12px oklch(0 0 0 / 10%);
+  box-shadow: var(--alert-notification-shadow);
   animation: notification-enter 0.3s ease-out;
 }
 

@@ -2,8 +2,18 @@
 
 ## Workflow
 
-- Before starting work on a new feature or fix, first create a GitHub issue using `gh issue create`, then use `gh issue develop <issue-number> --checkout` to create and checkout the working branch. Do not start implementation until the branch is set up this way.
+- Before starting work on a task, first search for an existing GitHub issue for it. If none exists, create one with `gh issue create`.
+- After selecting or creating the issue, use `gh issue develop <issue-number> --checkout` to create and checkout the working branch. Do not start implementation until the branch is set up this way.
 - Use `bun` as the package manager. Never use `npm`. Run scripts with `bun run`, install packages with `bun add`/`bun add -D`.
+- At the end of each task, always propose a commit message using the `type(scope): message` format.
+- Before opening a pull request, always evaluate whether the work warrants a version bump in `package.json`.
+- Treat the version decision as explicit, not automatic: decide whether the change is patch, minor, major, or does not warrant a bump yet.
+- Use semver consistently when making that decision:
+  - patch for fixes, low-risk internal improvements, docs-only updates that still need a release, and non-breaking maintenance changes
+  - minor for new features, new components, or additive non-breaking public API/styling capabilities
+  - major for breaking changes, removals, renamed APIs, changed defaults with migration impact, or styling changes that intentionally break consumer expectations
+- If the correct bump level is unclear, stop and ask the user before opening the pull request.
+- Ask the user before opening a pull request.
 
 ## Code Structure
 
@@ -11,7 +21,14 @@
 
 ## CSS
 
-- Components should use global theme tokens (`--background`, `--foreground`, `--border`, `--muted-foreground`, `--accent`, etc.) for shared properties. Never reference another component's variables (e.g. `--card`, `--card-foreground`, `--input`). Component-specific colors (e.g. `--alert-success`) should be defined in `src/index.css` under `:root` and `.dark` so consumers can override them.
+- Global styles live in `src/styles/`, with tokens in `src/styles/tokens/`.
+- Keep the current Tailwind/shadcn theme variables in `src/index.css` until the migration is complete.
+- `src/styles/tokens/colors.css` should only introduce new color variables. Use `light-dark()` there when appropriate, with a dark fallback for unsupported browsers.
+- `src/styles/index.css` is the entrypoint for new global token files and is imported by `src/index.css`.
+- Components should use shared semantic tokens (`--background`, `--foreground`, `--border`, `--muted-foreground`, `--accent`, etc.) for shared properties.
+- Migrated components should expose component-level override variables inside their own CSS files using `@scope(<root-class>)`.
+- Never reference another component's variables.
+- Read `ARCHITECTURE.md` before making structural CSS changes.
 
 ## Git
 

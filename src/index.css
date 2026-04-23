@@ -1,3 +1,5 @@
+@import "./styles/index.css";
+
 @theme inline {
   --radius-xs: calc(var(--radius) - 6px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -71,10 +73,10 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --z-index-notification: 10;
-  --alert-success: oklch(0.62 0.19 145);
-  --alert-info: oklch(0.55 0.19 255);
-  --alert-warning: oklch(0.75 0.18 85);
-  --alert-danger: oklch(0.58 0.24 27);
+  --alert-success: var(--color-success);
+  --alert-info: var(--color-info);
+  --alert-warning: var(--color-warning);
+  --alert-danger: var(--color-danger);
 }
 
 .dark {
@@ -109,8 +111,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-  --alert-success: oklch(0.72 0.19 145);
-  --alert-info: oklch(0.65 0.19 255);
-  --alert-warning: oklch(0.82 0.18 85);
-  --alert-danger: oklch(0.7 0.19 22);
+  --alert-success: var(--color-success);
+  --alert-info: var(--color-info);
+  --alert-warning: var(--color-warning);
+  --alert-danger: var(--color-danger);
 }
