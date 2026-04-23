@@ -1,4 +1,11 @@
+@scope (.autocomplete-trigger) {
+  :scope {
+    --autocomplete-trigger-justify-content: space-between;
+    --autocomplete-trigger-width: 100%;
+  }
+}
+
 .autocomplete-trigger {
-  justify-content: space-between;
-  width: 100%;
+  justify-content: var(--autocomplete-trigger-justify-content);
+  width: var(--autocomplete-trigger-width);
 }

@@ -1,13 +1,27 @@
+@scope (.button) {
+  :scope {
+    --button-background-color: transparent;
+    --button-text-color: inherit;
+    --button-border-color: var(--color-border);
+    --button-radius: var(--radius-md);
+    --button-shadow: none;
+    --button-focus-ring-color: var(--ring);
+    --button-focus-ring-shadow: 0 0 0 3px oklch(from var(--button-focus-ring-color) l c h / 50%);
+    --button-invalid-ring-color: var(--destructive);
+    --button-invalid-ring-shadow: 0 0 0 3px oklch(from var(--button-invalid-ring-color) l c h / 20%);
+  }
+}
+
 .button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   white-space: nowrap;
-  border: 1px solid transparent;
-  border-radius: var(--radius-md);
-  background-color: transparent;
-  color: inherit;
+  border: 1px solid var(--button-border-color);
+  border-radius: var(--button-radius);
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
   font-family: inherit;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -15,6 +29,7 @@
   cursor: pointer;
   flex-shrink: 0;
   outline: none;
+  box-shadow: var(--button-shadow);
   transition:
     color 0.15s ease,
     background-color 0.15s ease,
@@ -40,57 +55,42 @@
 }
 
 .button:focus-visible {
-  border-color: var(--ring);
-  box-shadow: 0 0 0 3px oklch(from var(--ring) l c h / 50%);
+  border-color: var(--button-focus-ring-color);
+  box-shadow: var(--button-focus-ring-shadow);
 }
 
 .button[aria-invalid="true"] {
-  border-color: var(--destructive);
-  box-shadow: 0 0 0 3px oklch(from var(--destructive) l c h / 20%);
-}
-
-.dark .button[aria-invalid="true"] {
-  box-shadow: 0 0 0 3px oklch(from var(--destructive) l c h / 40%);
+  border-color: var(--button-invalid-ring-color);
+  box-shadow: var(--button-invalid-ring-shadow);
 }
 
 /* ── Variants ── */
 .button--default {
-  background-color: var(--primary);
-  color: var(--primary-foreground);
-  box-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
+  --button-background-color: var(--primary);
+  --button-text-color: var(--primary-foreground);
+  --button-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
 }
 
 .button--default:hover:not(:disabled) {
-  background-color: oklch(from var(--primary) l c h / 90%);
+  background-color: oklch(from var(--button-background-color) l c h / 90%);
 }
 
 .button--destructive {
-  background-color: var(--destructive);
-  color: #fff;
-  box-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
+  --button-background-color: var(--destructive);
+  --button-text-color: #fff;
+  --button-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
+  --button-focus-ring-color: var(--destructive);
+  --button-focus-ring-shadow: 0 0 0 3px oklch(from var(--destructive) l c h / 20%);
 }
 
 .button--destructive:hover:not(:disabled) {
-  background-color: oklch(from var(--destructive) l c h / 90%);
-}
-
-.button--destructive:focus-visible {
-  box-shadow: 0 0 0 3px oklch(from var(--destructive) l c h / 20%);
-}
-
-.dark .button--destructive {
-  background-color: oklch(from var(--destructive) l c h / 60%);
-}
-
-.dark .button--destructive:focus-visible {
-  box-shadow: 0 0 0 3px oklch(from var(--destructive) l c h / 40%);
+  background-color: oklch(from var(--button-background-color) l c h / 90%);
 }
 
 .button--outline {
-  border-color: var(--border);
-  background-color: var(--background);
-  color: inherit;
-  box-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
+  --button-background-color: var(--background);
+  --button-border-color: var(--color-border);
+  --button-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
 }
 
 .button--outline:hover:not(:disabled) {
@@ -98,28 +98,19 @@
   color: var(--accent-foreground);
 }
 
-.dark .button--outline {
-  background-color: oklch(from var(--input) l c h / 30%);
-  border-color: var(--input);
-}
-
-.dark .button--outline:hover:not(:disabled) {
-  background-color: oklch(from var(--input) l c h / 50%);
-}
-
 .button--secondary {
-  background-color: var(--secondary);
-  color: var(--secondary-foreground);
-  box-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
+  --button-background-color: var(--secondary);
+  --button-text-color: var(--secondary-foreground);
+  --button-shadow: 0 1px 2px 0 oklch(0 0 0 / 5%);
 }
 
 .button--secondary:hover:not(:disabled) {
-  background-color: oklch(from var(--secondary) l c h / 80%);
+  background-color: oklch(from var(--button-background-color) l c h / 80%);
 }
 
 .button--ghost {
-  background-color: transparent;
-  color: inherit;
+  --button-background-color: transparent;
+  --button-text-color: inherit;
 }
 
 .button--ghost:hover:not(:disabled) {
@@ -127,18 +118,35 @@
   color: var(--accent-foreground);
 }
 
-.dark .button--ghost:hover:not(:disabled) {
-  background-color: oklch(from var(--accent) l c h / 50%);
-}
-
 .button--link {
-  background-color: transparent;
-  color: var(--primary);
+  --button-background-color: transparent;
+  --button-text-color: var(--primary);
   text-underline-offset: 4px;
 }
 
 .button--link:hover:not(:disabled) {
   text-decoration: underline;
+}
+
+.dark .button {
+  --button-invalid-ring-shadow: 0 0 0 3px oklch(from var(--button-invalid-ring-color) l c h / 40%);
+}
+
+.dark .button--destructive {
+  --button-background-color: oklch(from var(--destructive) l c h / 60%);
+  --button-focus-ring-shadow: 0 0 0 3px oklch(from var(--destructive) l c h / 40%);
+}
+
+.dark .button--outline {
+  --button-background-color: oklch(from var(--input) l c h / 30%);
+}
+
+.dark .button--outline:hover:not(:disabled) {
+  background-color: oklch(from var(--input) l c h / 50%);
+}
+
+.dark .button--ghost:hover:not(:disabled) {
+  background-color: oklch(from var(--accent) l c h / 50%);
 }
 
 /* ── Sizes ── */
@@ -156,7 +164,6 @@
   height: 2rem;
   gap: 0.375rem;
   padding: 0 0.75rem;
-  border-radius: var(--radius-md);
 }
 
 .button--size-sm:has(> svg) {
@@ -167,7 +174,6 @@
 .button--size-lg {
   height: 2.5rem;
   padding: 0 1.5rem;
-  border-radius: var(--radius-md);
 }
 
 .button--size-lg:has(> svg) {
