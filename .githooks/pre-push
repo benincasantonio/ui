@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Runs Biome lint + format checks before pushing.
+# Bypass with: git push --no-verify
+set -e
+
+if ! command -v bun >/dev/null 2>&1; then
+  echo "error: bun not found on PATH — install bun or use --no-verify to bypass" >&2
+  exit 1
+fi
+
+bun run check
