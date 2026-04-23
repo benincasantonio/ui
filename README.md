@@ -143,6 +143,22 @@ npm run test:unit:storybook
 npm run lint
 ```
 
+### Git hooks
+
+A pre-push hook runs Biome before every push so formatting/lint issues fail locally instead of on CI. The hook lives in `.githooks/pre-push` and is registered automatically the first time you run `bun install` (via the `prepare` script, which sets `core.hooksPath`).
+
+If the hook doesn't activate for some reason:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+To skip the hook for a single push (use sparingly):
+
+```bash
+git push --no-verify
+```
+
 ## Project Structure
 
 ```

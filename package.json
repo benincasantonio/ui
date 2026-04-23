@@ -34,6 +34,7 @@
     "format:check": "biome format .",
     "format:tailwind": "rustywind --write src/",
     "check": "biome check .",
+    "prepare": "git config core.hooksPath .githooks || true",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
