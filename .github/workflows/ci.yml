@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  commits:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enforce single-commit PR
+        if: github.event_name == 'pull_request' && github.event.pull_request.commits > 1
+        run: |
+          echo "::error::PR must be squashed to a single commit (got ${{ github.event.pull_request.commits }} commits). Squash and force-push."
+          exit 1
+
+  biome:
+    needs: commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: bun run check
+
+  paths:
+    needs: commits
+    runs-on: ubuntu-latest
+    outputs:
+      visual: ${{ steps.filter.outputs.visual }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            visual:
+              - 'src/**'
+              - '.storybook/**'
+              - 'package.json'
+              - 'bun.lock'
+
+  chromatic:
+    needs: [biome, paths]
+    if: >-
+      github.event_name == 'push' ||
+      needs.paths.outputs.visual == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+      - run: npx chromatic --project-token=${{ secrets.CHROMATIC_PROJECT_TOKEN }} --only-changed --exit-once-uploaded

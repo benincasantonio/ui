@@ -1,5 +1,8 @@
+import { DocsContainer } from "@storybook/addon-docs/blocks";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import type { Preview } from "@storybook/react-vite";
+import { createElement } from "react";
+import { themes } from "storybook/theming";
 import "./storybook.css";
 
 const preview: Preview = {
@@ -16,6 +19,32 @@ const preview: Preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: "todo",
+    },
+
+    chromatic: {
+      modes: {
+        light: { theme: "light" },
+        dark: { theme: "dark" },
+      },
+    },
+
+    docs: {
+      container: ({
+        context,
+        children,
+      }: {
+        context: Parameters<typeof DocsContainer>[0]["context"];
+        children: React.ReactNode;
+      }) => {
+        const story = context.storyById();
+        const { globals } = context.getStoryContext(story);
+        const isDark = globals.theme === "dark";
+        return createElement(
+          DocsContainer,
+          { context, theme: isDark ? themes.dark : themes.light },
+          children
+        );
+      },
     },
   },
 
