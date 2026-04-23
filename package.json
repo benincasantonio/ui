@@ -39,7 +39,8 @@
     "build-storybook": "storybook build",
     "test": "vitest run",
     "test:unit": "vitest run --coverage --project=unit",
-    "test:unit:storybook": "vitest run --project=storybook"
+    "test:unit:storybook": "vitest run --project=storybook",
+    "chromatic": "chromatic --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.1.15",
@@ -77,6 +78,7 @@
     "@vitest/browser-playwright": "^4.0.17",
     "@vitest/coverage-v8": "^4.0.17",
     "ajv": "^8.17.1",
+    "chromatic": "^16.5.0",
     "jsdom": "^27.4.0",
     "lucide-react": "^0.562.0",
     "playwright": "^1.54.1",

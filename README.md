@@ -1,5 +1,7 @@
 # @antoniobenincasa/ui
 
+[![Storybook](https://img.shields.io/badge/Storybook-Chromatic-ff4785?logo=chromatic&logoColor=white)](https://www.chromatic.com/library?appId=CHROMATIC_APP_ID)
+
 A personal design system library built with React, TypeScript, and shadcn/ui components. This library provides a collection of reusable, accessible UI components styled with Tailwind CSS.
 
 ## Features

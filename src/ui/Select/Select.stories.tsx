@@ -140,7 +140,7 @@ export const Default: Story = {
         () => {
           expect(trigger).toHaveTextContent("Banana");
         },
-        { timeout: 2000 },
+        { timeout: 2000 }
       );
     });
   },
@@ -182,8 +182,7 @@ export const WithGroups: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Select with multiple groups, labels, and separators for better organization.",
+        story: "Select with multiple groups, labels, and separators for better organization.",
       },
     },
   },
@@ -219,13 +218,9 @@ export const Controlled: Story = {
           </SelectContent>
         </Select>
         <div className="p-3 rounded-md border">
-          <div className="mb-2 text-xs font-medium text-muted-foreground">
-            Selected Value:
-          </div>
+          <div className="mb-2 text-xs font-medium text-muted-foreground">Selected Value:</div>
           <div className="font-mono text-sm">
-            {value || (
-              <span className="italic text-muted-foreground">(none)</span>
-            )}
+            {value || <span className="italic text-muted-foreground">(none)</span>}
           </div>
         </div>
         <button
@@ -435,9 +430,7 @@ export const FormIntegration: Story = {
           </label>
           <Select
             value={formData.country}
-            onValueChange={(value) =>
-              setFormData({ ...formData, country: value })
-            }
+            onValueChange={(value) => setFormData({ ...formData, country: value })}
           >
             <SelectTrigger className="w-full" aria-invalid={!!errors.country}>
               <SelectValue placeholder="Select your country" />
@@ -450,9 +443,7 @@ export const FormIntegration: Story = {
               ))}
             </SelectContent>
           </Select>
-          {errors.country && (
-            <p className="text-sm text-red-500">{errors.country}</p>
-          )}
+          {errors.country && <p className="text-sm text-red-500">{errors.country}</p>}
         </div>
 
         <div className="space-y-2">
@@ -526,7 +517,7 @@ export const FormIntegration: Story = {
         () => {
           expect(countryTriggers[0]).toHaveTextContent("United Kingdom");
         },
-        { timeout: 2000 },
+        { timeout: 2000 }
       );
 
       // Select role
@@ -541,7 +532,7 @@ export const FormIntegration: Story = {
         () => {
           expect(countryTriggers[1]).toHaveTextContent("Developer");
         },
-        { timeout: 2000 },
+        { timeout: 2000 }
       );
 
       // Submit form
@@ -550,9 +541,9 @@ export const FormIntegration: Story = {
 
       // Wait for success message
       const successMessage = await canvas.findByText(
-        "Form submitted successfully!",
+        /form submitted successfully/i,
         {},
-        { timeout: 3000 },
+        { timeout: 3000 }
       );
       expect(successMessage).toBeInTheDocument();
     });
@@ -560,8 +551,7 @@ export const FormIntegration: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Complete form example with multiple selects, validation, and error handling.",
+        story: "Complete form example with multiple selects, validation, and error handling.",
       },
     },
   },
@@ -578,15 +568,9 @@ export const CustomWidth: Story = {
           <SelectValue placeholder="Wide select (300px)" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="option1">
-            Long option text that might wrap
-          </SelectItem>
-          <SelectItem value="option2">
-            Another long option for testing
-          </SelectItem>
-          <SelectItem value="option3">
-            Yet another long option text here
-          </SelectItem>
+          <SelectItem value="option1">Long option text that might wrap</SelectItem>
+          <SelectItem value="option2">Another long option for testing</SelectItem>
+          <SelectItem value="option3">Yet another long option text here</SelectItem>
         </SelectContent>
       </Select>
 
@@ -676,10 +660,7 @@ export const ScrollableContent: Story = {
         </SelectTrigger>
         <SelectContent>
           {countries.map((country) => (
-            <SelectItem
-              key={country}
-              value={country.toLowerCase().replace(/\s+/g, "-")}
-            >
+            <SelectItem key={country} value={country.toLowerCase().replace(/\s+/g, "-")}>
               {country}
             </SelectItem>
           ))}
@@ -690,8 +671,7 @@ export const ScrollableContent: Story = {
   parameters: {
     docs: {
       description: {
-        story:
-          "Select with many options showing automatic scrolling with scroll indicators.",
+        story: "Select with many options showing automatic scrolling with scroll indicators.",
       },
     },
   },

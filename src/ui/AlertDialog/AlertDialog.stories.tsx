@@ -229,9 +229,9 @@ export const Destructive: Story = {
 
       await waitFor(() => {
         expect(document.body).toHaveTextContent("Delete Account");
-        const actionButton = within(document.body).getAllByRole("button", {
+        const actionButton = within(document.body).getByRole("button", {
           name: /delete account/i,
-        })[1]; // The action button inside the dialog
+        });
         expect(actionButton).toHaveAttribute("data-variant", "destructive");
       });
     });

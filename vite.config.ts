@@ -21,19 +21,20 @@ export default defineConfig(({ mode }) => {
     plugins: [
       react(),
       shouldIncludeTailwind && tailwindcss(),
-      dts({
-        insertTypesEntry: true,
-        include: ["src"],
-        exclude: [
-          "**/*.stories.tsx",
-          "**/*.spec.tsx",
-          "**/*.test.tsx",
-          "**/*.stories.ts",
-          "**/main.tsx",
-        ],
-        tsconfigPath: "./tsconfig.app.json",
-        rollupTypes: true,
-      }),
+      isBuildingLibrary &&
+        dts({
+          insertTypesEntry: true,
+          include: ["src"],
+          exclude: [
+            "**/*.stories.tsx",
+            "**/*.spec.tsx",
+            "**/*.test.tsx",
+            "**/*.stories.ts",
+            "**/main.tsx",
+          ],
+          tsconfigPath: "./tsconfig.app.json",
+          rollupTypes: true,
+        }),
     ],
     build: {
       lib: {
